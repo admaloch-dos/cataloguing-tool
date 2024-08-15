@@ -11,14 +11,25 @@ let yearsSpan = document.querySelector('.years-span')
 let enslavedSpan = document.querySelector('.enslaved-span')
 
 
-const updateStringHandler = () => {
+const updateStringHandler = (inputElement) => {
     unknownSpanHandler()
-    const {preferredLastName, secondaryLastName} = lastNameHandler()
+    let currSection = ''
+    currSection = inputElement ? inputElement.closest('.main-section').id : ''
 
+    const lastNameSection = document.querySelector('.last-name-section')
+    const lastNameResults = currSection === 'last-name-section' && genStrings(lastNameSection)
+    const { preferred: preferredLastName, secondary: secondaryLastNames } = lastNameResults
 
     preferredNameSpan.innerText = `${preferredLastName}`
-    secondaryNameSpan.innerText = ` (${secondaryLastName})`
+    secondaryNameSpan.innerText = `(${secondaryLastNames})`
 }
+
+// const lastNameHandler = (currSection) => {
+
+
+// }
+
+
 
 //for unknown checkbox
 const unknownSpanHandler = () => {
@@ -35,32 +46,26 @@ const unknownSpanHandler = () => {
     }
 }
 
-// for last name section
-const lastNameHandler = () => {
-    let preferredLastName = '';
-    let secondaryLastName = '';
-    let lastNameSection = document.querySelector('.last-name-section')
-    lastNameSection.querySelectorAll('.preferred-btn').forEach(btn => {
+
+//utility func for generating string for last/first/middle names preferred and secondary
+const genStrings = (container) => {
+    // console.log(container)
+    let preferred = '';
+    let secondary = '';
+    container.querySelectorAll('.preferred-btn').forEach(btn => {
         const textValue = btn.closest('.input-item').querySelector('.form-item-input').value
         // console.log(textValue)
         if (textValue && textValue.length > 1) {
             const formattedInput = textValue.slice(0, 1).toUpperCase() + textValue.slice(1)
             if (btn.checked) {
-                preferredLastName = formattedInput
+                preferred = formattedInput
             } else {
-                if (textValue) {
-                    console.log(secondaryLastName)
-                    secondaryLastName += !secondaryLastName ? formattedInput : ` ${secondaryLastName}`
-                }
+                secondary += !secondary ? formattedInput : ` ${formattedInput}`
             }
         }
     })
-    return { preferredLastName, secondaryLastName }
+    return { preferred, secondary }
 }
-
-//func for generating string for last/first/middle names
-
-// const genStrings = (container, preferredName, )
 
 
 //various funcs/listeners
