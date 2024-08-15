@@ -13,9 +13,14 @@ let enslavedSpan = document.querySelector('.enslaved-span')
 
 const updateStringHandler = () => {
     unknownSpanHandler()
-    // lastNameHandler()
+    const {preferredLastName, secondaryLastName} = lastNameHandler()
+
+
+    preferredNameSpan.innerText = `${preferredLastName}`
+    secondaryNameSpan.innerText = ` (${secondaryLastName})`
 }
 
+//for unknown checkbox
 const unknownSpanHandler = () => {
     const unknownCheckBox = document.querySelector('.unknown-item-toggle')
     const unknownNameSelect = document.querySelector('#unknownNameSelect')
@@ -30,40 +35,80 @@ const unknownSpanHandler = () => {
     }
 }
 
+// for last name section
 const lastNameHandler = () => {
-    let lastNameInput = document.querySelector('#lastName')
-    let lastPenInput = document.querySelector('#penNameLast')
-    let lastAnglicizedInput = document.querySelector('#anglicizedLastName')
-    // console.log(lastNameInput.value, lastPenInput.value, lastAnglicizedInput.value)
-    // if(lastNameInput.value) {
-    //     const checkBoxes = lastNameInput.
-    // }
-
-    const checkbox = document.getElementById('btn-check');
-    console.log(checkbox.checked)
-
+    let preferredLastName = '';
+    let secondaryLastName = '';
+    let lastNameSection = document.querySelector('.last-name-section')
+    lastNameSection.querySelectorAll('.preferred-btn').forEach(btn => {
+        const textValue = btn.closest('.input-item').querySelector('.form-item-input').value
+        // console.log(textValue)
+        if (textValue && textValue.length > 1) {
+            const formattedInput = textValue.slice(0, 1).toUpperCase() + textValue.slice(1)
+            if (btn.checked) {
+                preferredLastName = formattedInput
+            } else {
+                if (textValue) {
+                    console.log(secondaryLastName)
+                    secondaryLastName += !secondaryLastName ? formattedInput : ` ${secondaryLastName}`
+                }
+            }
+        }
+    })
+    return { preferredLastName, secondaryLastName }
 }
 
+//func for generating string for last/first/middle names
+
+// const genStrings = (container, preferredName, )
 
 
+//various funcs/listeners
 //listen for every form input item and show checkbox + select items on text input
 const formInputItems = document.querySelectorAll('.form-item-input').forEach(input => {
     input.addEventListener('keyup', () => {
+
         const checkBoxesContainer = input.nextElementSibling
+        const prefferedBtn = checkBoxesContainer.querySelector('.preferred-btn')
         if (input.value) {
-            checkBoxesContainer.classList.remove('d-none')
-            checkBoxesContainer.classList.add('d-flex')
+            // checkBoxesContainer.classList.remove('d-none')
+            // checkBoxesContainer.classList.add('d-flex')
+            if (prefferedBtn && !prefferedBtn.checked) prefferedBtn.click()
         } else {
-            checkBoxesContainer.classList.remove('d-flex')
-            checkBoxesContainer.classList.add('d-none')
+            // checkBoxesContainer.classList.remove('d-flex')
+            // checkBoxesContainer.classList.add('d-none')
+            if (prefferedBtn && prefferedBtn.checked) prefferedBtn.click()
+            resetPreferredInput(input)
         }
     })
-
 })
 
-document.querySelectorAll('.btn-check').forEach(btn => {
-    btn.addEventListener('click', function () {
-        console.log(this.checked)
+
+
+// if the current preferred input is erased, search for the first input that has text
+const resetPreferredInput = (input) => {
+    const parentContainer = input.closest('.name-section')
+    const filledInput = Array.from(parentContainer.querySelectorAll('.form-item-input')).find(input => input.value.length > 0);
+    if (filledInput) {
+        const prefferedBtn = filledInput.nextElementSibling.querySelector('.preferred-btn')
+        prefferedBtn.click()
+    }
+    updateStringHandler()
+}
+
+//listen for the preferred btn for last first and middle names and unclick if new one is clicked -- only one item can be preferred
+document.querySelectorAll('.preferred-btn').forEach(btn => {
+    btn.addEventListener('change', function () {
+        const parentContainer = this.closest('.name-section')
+        if (parentContainer) {
+            const preferredButtons = parentContainer.querySelectorAll('.preferred-btn');
+            preferredButtons.forEach(item => {
+                if (item.id !== this.id && item.checked) {
+                    item.click()
+                }
+            })
+        }
+        updateStringHandler()
     });
 })
 
