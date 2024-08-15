@@ -16,23 +16,26 @@ const updateStringHandler = (inputElement) => {
     let currSection = ''
     currSection = inputElement ? inputElement.closest('.main-section').id : ''
 
-    const { preferred: preferredLastName, secondary: secondaryLastNames } = lastNameHandler()
-    const { preferred: preferredFirstName, secondary: secondaryFirstName } = firstNameHandler()
+    console.log(inputElement)
 
-    console.log('preferredFirstName', preferredFirstName)
-    console.log('secondaryFirstName', secondaryFirstName)
+    const { preferred: preferredLastName, secondary: secondaryLastNames } = lastNameHandler(inputElement)
+    const { preferred: preferredFirstName, secondary: secondaryFirstName } = firstNameHandler(inputElement)
+
+    // console.log('preferredFirstName', preferredFirstName)
+    // console.log('secondaryFirstName', secondaryFirstName)
 
     preferredNameSpan.innerText = `${preferredLastName}, ${preferredFirstName}`
     secondaryNameSpan.innerText = `(${secondaryLastNames}${secondaryFirstName})`
 }
 
-const lastNameHandler = () => {
+const lastNameHandler = (inputElement) => {
     const lastNameSection = document.querySelector('.last-name-section')
-    return genStrings(lastNameSection)
+    return genStrings(lastNameSection, inputElement)
 }
-const firstNameHandler = () => {
+
+const firstNameHandler = (inputElement) => {
     const firstNameSection = document.querySelector('.first-name-section')
-    return genStrings(firstNameSection)
+    return genStrings(firstNameSection, inputElement)
 }
 
 
@@ -54,28 +57,31 @@ const unknownSpanHandler = () => {
 
 
 //utility func for generating string for last/first/middle names preferred and secondary
-const genStrings = (container) => {
+const genStrings = (container, inputElement) => {
+
     let preferred = '';
     let secondary = '';
     container.querySelectorAll('.preferred-btn').forEach(btn => {
         const textInput = btn.closest('.input-item').querySelector('.form-item-input')
+        console.log(textInput)
         if (!textInput) return
         const textValue = textInput.value
+        const formattedInputVal = textValue.slice(0, 1).toUpperCase() + textValue.slice(1)
+        const testInputVal = formatStrings(textInput)
         if (textValue && textValue.length > 1) {
-            const upperCaseInputVal = textValue.slice(0, 1).toUpperCase() + textValue.slice(1)
 
             if (btn.checked) {
-                preferred = upperCaseInputVal
+                preferred = formattedInputVal
             } else {
-                secondary += !secondary ? upperCaseInputVal : ` ${upperCaseInputVal}`
+                secondary += !secondary ? formattedInputVal : ` ${formattedInputVal}`
             }
         }
     })
     return { preferred, secondary }
 }
 
-const formatStrings = (input, inputVal) =>{
-
+const formatStrings = (input) => {
+    // console.log(input)
 }
 
 //various funcs/listeners
