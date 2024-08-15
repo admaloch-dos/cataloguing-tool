@@ -39,6 +39,9 @@ const lastNameHandler = () => {
     //     const checkBoxes = lastNameInput.
     // }
 
+    const checkbox = document.getElementById('btn-check');
+    console.log(checkbox.checked)
+
 }
 
 
@@ -50,7 +53,7 @@ const formInputItems = document.querySelectorAll('.form-item-input').forEach(inp
         if (input.value) {
             checkBoxesContainer.classList.remove('d-none')
             checkBoxesContainer.classList.add('d-flex')
-        } else  {
+        } else {
             checkBoxesContainer.classList.remove('d-flex')
             checkBoxesContainer.classList.add('d-none')
         }
@@ -58,6 +61,14 @@ const formInputItems = document.querySelectorAll('.form-item-input').forEach(inp
 
 })
 
+document.querySelectorAll('.btn-check').forEach(btn => {
+    btn.addEventListener('click', function () {
+        console.log(this.checked)
+    });
+})
+
+
+//temporary hide hide toggle
 const hideItemToggle = document.querySelectorAll('.hide-item-toggle').forEach(item => {
     item.closest('.custom-checkbox ').classList.remove('d-flex')
     item.closest('.custom-checkbox ').classList.add('d-none')

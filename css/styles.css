@@ -51,3 +51,20 @@ h3 {
 /* .check-boxes {
     display: none;
 } */
+
+.custom-btn {
+    border-radius: 50px;
+    padding: .2rem .35rem;
+}
+
+.fa-style {
+    font-size: 12px;
+    position: relative;
+    left: .035rem;
+    top: .05rem;
+}
+
+
+
+
+

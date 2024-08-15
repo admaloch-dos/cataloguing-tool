@@ -1,588 +1,583 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE htms>
+<htms lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Custom Checkbox</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+            integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="css/styles.css">
+        <title>Custom Checkbox</title>
 
-</head>
+    </head>
 
-<body>
+    <body>
 
-    <header id="cataloguing-header" class="fluid-container d-flex justify-content-center align-items-center">
-        <h1>Florida Memory Cataloguing Tool</h1>
-    </header>
+        <header id="cataloguing-header" class="fluid-container d-flex justify-content-center align-items-center">
+            <h1>Florida Memory Cataloguing Tool</h1>
+        </header>
 
-    <main id="cataloguing-container" class="container mt-5">
-        <div class="preview d-flex align-items-center">
-            <span class="unknown-name-span">Maloch, Andrew D. </span><span class="preferred-name-span">Maloch, Andrew D.
-            </span><span class="secondary-name-span">(Andrew Davis)</span><span class="years-span">1991-</span> <span
-                class="enslaved-span"></span>
-        </div>
-        <form action="" class="form-group">
-
-            <div class="unknown-name-section d-flex ">
-                <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2"
-                    for="unknown-checkbox">
-                    <span class="custom-label">Click if name is unknown:</span>
-                    <input id="unknown-checkbox" onClick="updateStringHandler()" type="checkbox"
-                        class="show-item-checkbox ml-1 unknown-item-toggle">
-                </label>
-                <select onChange="updateStringHandler()" id="unknownNameSelect">
-                    <option value="Unnamed Person">Unnamed Person</option>
-                    <option value="Unnamed Female">Unnamed Female</option>
-                    <option value="Unnamed Male">Unnamed Male</option>
-                    <option value="Anonymous">Anonymous</option>
-                </select>
+        <main id="cataloguing-container" class="container mt-5">
+            <div class="preview d-flex align-items-center">
+                <span class="unknown-name-span">Maloch, Andrew D. </span><span class="preferred-name-span">Maloch,
+                    Andrew D.
+                </span><span class="secondary-name-span">(Andrew Davis)</span><span class="years-span">1991-</span>
+                <span class="enslaved-span"></span>
             </div>
+            <form action="" class="form-group">
 
-            <div class="last-name-section ">
-                <h3>Last Name</h3>
-                <div class="input-item input-group d-flex  align-items-center">
-                    <label class="mr-1" for="lastName">Last Name:</label>
-
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="lastName">
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle" checked>
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle">
-                        </label>
-                    </div>
-
-
-                </div>
-
-                <div class="input-item input-group d-flex  align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Pen name ex. Twain, Mark (Clemens, Samuel Langhorne), 1835-1910"></i>
-                    <label class="mr-1" for="penNameLast">Pen Name(last):</label>
-
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="penNameLast">
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle" checked>
-                        </label>
-                    </div>
-
-
-                </div>
-
-                <div class="input-item input-group d-flex  align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Anglicized name ex. Copernicus, Nicholas (Kopernik, Mikołaj), 1473-1543"></i>
-                    <label class="mr-1" for="anglicizedLastName">Anglicized Name(last):</label>
-
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="anglicizedLastName">
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle" checked>
-                        </label>
-                    </div>
-
-                </div>
-
-
-            </div>
-
-            <div class="first-name-section ">
-                <h3>First Name</h3>
-                <!-- First Name Input -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <label class="mr-1" for="firstName">First Name:</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="firstName">
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle" checked>
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle">
-                        </label>
-                    </div>
-
-                </div>
-
-                <!-- Initial Preferred -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Ex. Gray, R.A. (Robert Alan)"></i>
-                    <label class="mr-1" for="initialPreferred">Initial Preferred:</label>
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle" checked>
-                        </label>
-                    </div>
-
-
-                </div>
-
-                <!-- Preferred Shortname -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Ex. Franklin, Ben (Benjamin), 1706-1790"></i>
-                    <label class="mr-1" for="preferredShortname">Preferred Shortname:</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="preferredShortname">
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle" checked>
-                        </label>
-                    </div>
-                </div>
-
-
-                <!-- Pen Name (First) -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Pen name ex. Twain, Mark (Clemens, Samuel Langhorne), 1835-1910"></i>
-                    <label class="mr-1" for="penNameFirst">Pen Name (First):</label>
-
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="penNameFirst">
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle">
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Anglicized Name (First) -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Anglicized name ex. Copernicus, Nicholas (Kopernik, Mikołaj), 1473-1543"></i>
-                    <label class="mr-1" for="anglicizedNameFirst">Anglicized Name (First):</label>
-
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="anglicizedNameFirst">
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle">
-                        </label>
-                    </div>
-
-
-                </div>
-
-                <!-- Nickname -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Ex. Boltin, 'Cousin Thelma' (Thelma Ann), 1904-1993"></i>
-                    <label class="mr-1" for="nickname">Nickname:</label>
-
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="nickname">
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle">
-                        </label>
-                    </div>
-
-
-                </div>
-
-                <!-- Infant -->
-                <div class="input-item input-group d-flex align-items-center">
-<i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Ex. Hutchingson, [Infant], ca.1859-ca.1860"></i>
-                    <label class="mr-1" for="infant">Infant:</label>
-
-
-                    <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                        <span class="custom-label"></span>
-                        <input type="checkbox" class="show-item-checkbox ml-1 preferred-item-toggle">
+                <div class="unknown-name-section d-flex ">
+                    <label class="custom-checkbox d-flex justify-content-center align-items-center me-2"
+                        for="unknown-checkbox">
+                        <span class="custom-label">Click if name is unknown:</span>
+                        <input id="unknown-checkbox" onClick="updateStringHandler()" type="checkbox"
+                            class="show-item-checkbox ms-1 unknown-item-toggle">
                     </label>
+                    <select onChange="updateStringHandler()" id="unknownNameSelect">
+                        <option value="Unnamed Person">Unnamed Person</option>
+                        <option value="Unnamed Female">Unnamed Female</option>
+                        <option value="Unnamed Male">Unnamed Male</option>
+                        <option value="Anonymous">Anonymous</option>
+                    </select>
+                </div>
+
+                <div class="last-name-section ">
+                    <h3>Last Name</h3>
+                    <div class="input-item input-group d-flex  align-items-center">
+                        <label class="me-1" for="lastName">Last Name:</label>
+
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="lastName">
+                        <div class="checked-boxes">
+                            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
+                            <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check"><i
+                                    class="fa-solid fa-p fa-style"></i></label>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="input-item input-group d-flex  align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Pen name ex. Twain, Mark (Clemens, Samuel Langhorne), 1835-1910"></i>
+                        <label class="me-1" for="penNameLast">Pen Name(last):</label>
+
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="penNameLast">
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle" checked>
+                            </label>
+                        </div>
+
+
+                    </div>
+
+                    <div class="input-item input-group d-flex  align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Anglicized name ex. Copernicus, Nicholas (Kopernik, Mikołaj), 1473-1543"></i>
+                        <label class="me-1" for="anglicizedLastName">Anglicized Name(last):</label>
+
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="anglicizedLastName">
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle" checked>
+                            </label>
+                        </div>
+
+                    </div>
+
 
                 </div>
-            </div>
 
-            <div class="middle-name-section ">
-                <h3>Middle Name</h3>
+                <div class="first-name-section ">
+                    <h3>First Name</h3>
+                    <!-- First Name Input -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <label class="me-1" for="firstName">First Name:</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="firstName">
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle" checked>
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle">
+                            </label>
+                        </div>
 
-                <div class="input-item input-group d-flex align-items-center">
-                    <label class="mr-1" for="middle-name">Middle Name(s):</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="middle-name">
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
+                    </div>
+
+                    <!-- Initial Preferred -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Ex. Gray, R.A. (Robert Alan)"></i>
+                        <label class="me-1" for="initialPreferred">Initial Preferred:</label>
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle" checked>
+                            </label>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Preferred Shortname -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Ex. Franklin, Ben (Benjamin), 1706-1790"></i>
+                        <label class="me-1" for="preferredShortname">Preferred Shortname:</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="preferredShortname">
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle" checked>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <!-- Pen Name (First) -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Pen name ex. Twain, Mark (Clemens, Samuel Langhorne), 1835-1910"></i>
+                        <label class="me-1" for="penNameFirst">Pen Name (First):</label>
+
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="penNameFirst">
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle">
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Anglicized Name (First) -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Anglicized name ex. Copernicus, Nicholas (Kopernik, Mikołaj), 1473-1543"></i>
+                        <label class="me-1" for="anglicizedNameFirst">Anglicized Name (First):</label>
+
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="anglicizedNameFirst">
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle">
+                            </label>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Nickname -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Ex. Boltin, 'Cousin Thelma' (Thelma Ann), 1904-1993"></i>
+                        <label class="me-1" for="nickname">Nickname:</label>
+
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="nickname">
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle">
+                            </label>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Infant -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Ex. Hutchingson, [Infant], ca.1859-ca.1860"></i>
+                        <label class="me-1" for="infant">Infant:</label>
+
+
+                        <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                            <span class="custom-label"></span>
+                            <input type="checkbox" class="show-item-checkbox ms-1 preferred-item-toggle">
+                        </label>
+
+                    </div>
+                </div>
+
+                <div class="middle-name-section ">
+                    <h3>Middle Name</h3>
+
+                    <div class="input-item input-group d-flex align-items-center">
+                        <label class="me-1" for="middle-name">Middle Name(s):</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="middle-name">
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle" checked>
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle">
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Ex. Gray, R.A. (Robert Alan)"></i>
+                        <label class="me-1" for="initials-preferred">Initial(s) preferred:</label>
+                        <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                             <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
+                            <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
                         </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
+                        <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                             <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle" checked>
+                            <input type="checkbox" class="show-item-checkbox ms-1 P-toggle">
                         </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
+                        <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                             <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle">
+                            <input type="checkbox" class="show-item-checkbox ms-1 S-toggle" checked>
                         </label>
+
                     </div>
 
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Anglicized name ex. Copernicus, Nicholas (Kopernik, Mikołaj), 1473-1543"></i>
+                        <label class="me-1" for="anglicized-name-middle">Anglicized Name(Middle):</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="anglicized-name-middle">
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle checked">
+                            </label>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div class="input-item input-group d-flex align-items-center">
-                     <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Ex. Gray, R.A. (Robert Alan)"></i>
-                    <label class="mr-1" for="initials-preferred">Initial(s) preferred:</label>
-                    <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                        <span class="custom-label">Hide</span>
-                        <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                    </label>
-                    <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                        <span class="custom-label">P</span>
-                        <input type="checkbox" class="show-item-checkbox ml-1 P-toggle">
-                    </label>
-                    <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                        <span class="custom-label">S</span>
-                        <input type="checkbox" class="show-item-checkbox ml-1 S-toggle" checked>
-                    </label>
+                <div class="additional-names-section ">
+                    <h3>Additional Names</h3>
 
+                    <!-- Maiden Name -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Vereen, Annie Pauline Shelley Gwynn, 1916-2002"></i>
+                        <label class="me-1" for="maidenName">Maiden Name:</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="maidenName">
+
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle" checked>
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle">
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <!-- Additional Last Names -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Typically a woman's married names Ex. Vereen, Annie Pauline Shelley Gwynn, 1916-2002"></i>
+                        <label class="me-1" for="additionalLastNames">Additional Last Names:</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="additionalLastNames">
+
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle" checked>
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle">
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <!-- Suffixes -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Jr., Sr. or II, III etc.. Ex. King, Martin Luther, Jr., 1929-1968"></i>
+                        <label class="me-1" for="suffixes">Suffixes:</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="suffixes">
+
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">P</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 P-toggle" checked>
+                            </label>
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">S</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 S-toggle">
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Anglicized name ex. Copernicus, Nicholas (Kopernik, Mikołaj), 1473-1543"></i>
-                    <label class="mr-1" for="anglicized-name-middle">Anglicized Name(Middle):</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="anglicized-name-middle">
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
+                <div class="title-section ">
+                    <h3>Titles</h3>
+
+                    <!-- Title -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <label class="me-1" for="title">Title:</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="title">
+
+                        <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                             <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle checked">
+                            <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle" checked>
                         </label>
                     </div>
 
-                </div>
-            </div>
+                    <!-- Indigenous Name -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Hillis Hodjo (Francis the Prophet), ca. 1770-1818"></i>
+                        <label class="me-1" for="indigenousName">Indigenous Name:</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="indigenousName">
 
-            <div class="additional-names-section ">
-                <h3>Additional Names</h3>
 
-                <!-- Maiden Name -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Vereen, Annie Pauline Shelley Gwynn, 1916-2002"></i>
-                    <label class="mr-1" for="maidenName">Maiden Name:</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="maidenName">
-
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle" checked>
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle">
-                        </label>
-                    </div>
-
-                </div>
-
-                <!-- Additional Last Names -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Typically a woman's married names Ex. Vereen, Annie Pauline Shelley Gwynn, 1916-2002"></i>
-                    <label class="mr-1" for="additionalLastNames">Additional Last Names:</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="additionalLastNames">
-
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle" checked>
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle">
-                        </label>
-                    </div>
-
-                </div>
-
-                <!-- Suffixes -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Jr., Sr. or II, III etc.. Ex. King, Martin Luther, Jr., 1929-1968"></i>
-                    <label class="mr-1" for="suffixes">Suffixes:</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="suffixes">
-
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">P</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 P-toggle" checked>
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">S</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 S-toggle">
-                        </label>
                     </div>
                 </div>
-            </div>
 
-            <div class="title-section ">
-                <h3>Titles</h3>
+                <div class="years-section">
+                    <h3>Years</h3>
 
-                <!-- Title -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <label class="mr-1" for="title">Title:</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="title">
-
-                    <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                        <span class="custom-label">Hide</span>
-                        <input type="checkbox" class="show-item-checkbox ml-1 hide-item-toggle" checked>
-                    </label>
-                </div>
-
-                <!-- Indigenous Name -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Hillis Hodjo (Francis the Prophet), ca. 1770-1818"></i>
-                    <label class="mr-1" for="indigenousName">Indigenous Name:</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="indigenousName">
+                    <!-- Birth Date -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Ex. Rinehart, Alfred Edward, ca. 1852- a. 1915"></i>
+                        <label class="me-1" for="birthDate">Birth Date:</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="birthDate">
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Ca.</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 circa-before-toggle">
+                            </label>
+                            <select name="before" class="before-after">
+                                <option value=""></option>
+                                <option value="b.">Before</option>
+                                <option value="a.">After</option>
+                            </select>
+                        </div>
 
 
-                </div>
-            </div>
-
-            <div class="years-section">
-                <h3>Years</h3>
-
-                <!-- Birth Date -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Ex. Rinehart, Alfred Edward, ca. 1852- a. 1915"></i>
-                    <label class="mr-1" for="birthDate">Birth Date:</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="birthDate">
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Ca.</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 circa-before-toggle">
-                        </label>
-                        <select name="before" class="before-after">
-                            <option value=""></option>
-                            <option value="b.">Before</option>
-                            <option value="a.">After</option>
-                        </select>
                     </div>
 
+                    <!-- Death Date -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Ex. Fleischmann, Udo M., d. 1952"></i>
+                        <label class="me-1" for="deathDate">Death Date:</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="deathDate">
 
-                </div>
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Ca.</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 circa-before-toggle">
+                            </label>
+                            <select name="before" class="before-after">
+                                <option value=""></option>
+                                <option value="b.">Before</option>
+                                <option value="a.">After</option>
+                            </select>
+                        </div>
 
-                <!-- Death Date -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Ex. Fleischmann, Udo M., d. 1952"></i>
-                    <label class="mr-1" for="deathDate">Death Date:</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="deathDate">
-
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Ca.</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 circa-before-toggle">
-                        </label>
-                        <select name="before" class="before-after">
-                            <option value=""></option>
-                            <option value="b.">Before</option>
-                            <option value="a.">After</option>
-                        </select>
                     </div>
 
+                    <!-- Flourished -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Use if only general period is known. ex. Saturiwa, fl. 16th century"></i>
+                        <label class="me-1" for="flourished">Flourished:</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="flourished">
+
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Ca.</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 circa-before-toggle">
+                            </label>
+                            <select name="before" class="before-after">
+                                <option value=""></option>
+                                <option value="b.">Before</option>
+                                <option value="a.">After</option>
+                            </select>
+                        </div>
+
+                    </div>
                 </div>
 
-                <!-- Flourished -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Use if only general period is known. ex. Saturiwa, fl. 16th century"></i>
-                    <label class="mr-1" for="flourished">Flourished:</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="flourished">
 
-                    <div class="check-boxes d-none">
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                            <span class="custom-label">Ca.</span>
-                            <input type="checkbox" class="show-item-checkbox ml-1 circa-before-toggle">
+                <div class="enslaved-section">
+                    <h3>Enslaved</h3>
+
+                    <!-- Enslaved Checkbox -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="Ex. Patsy, ca.1836-ca.1850 (enslaved person)"></i>
+                        <label class="me-1" for="enslaved">Enslaved:</label>
+                        <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                            <input type="checkbox" class="show-item-checkbox ms-1 enslaved-toggle" id="enslaved">
+                            <span class="custom-label"></span>
                         </label>
-                        <select name="before" class="before-after">
-                            <option value=""></option>
-                            <option value="b.">Before</option>
-                            <option value="a.">After</option>
-                        </select>
+
                     </div>
 
-                </div>
-            </div>
+                    <!-- Enslaved By -->
+                    <div class="input-item input-group d-flex align-items-center">
+                        <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
+                            data-bs-placement="top" data-bs-trigger="hover"
+                            data-bs-content="[Unnamed female], ca.1860-ca.1860 (enslaved by W. C. Cunningham)"></i>
+                        <label class="me-1" for="enslavedBy">Enslaved By:</label>
+                        <input class="me-2 form-item-input" onkeypress="updateStringHandler()" type="text"
+                            class="form-control" id="enslavedBy">
 
 
-            <div class="enslaved-section">
-                <h3>Enslaved</h3>
-
-                <!-- Enslaved Checkbox -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="Ex. Patsy, ca.1836-ca.1850 (enslaved person)"></i>
-                    <label class="mr-1" for="enslaved">Enslaved:</label>
-                    <label class="custom-checkbox d-flex justify-content-center align-items-center mr-2">
-                        <input type="checkbox" class="show-item-checkbox ml-1 enslaved-toggle" id="enslaved">
-                        <span class="custom-label"></span>
-                    </label>
-
+                    </div>
                 </div>
 
-                <!-- Enslaved By -->
-                <div class="input-item input-group d-flex align-items-center">
-                    <i class="fas fa-info-circle info-icon mr-1" data-bs-container="body" data-bs-toggle="popover"
-                        data-bs-placement="top" data-bs-trigger="hover"
-                        data-bs-content="[Unnamed female], ca.1860-ca.1860 (enslaved by W. C. Cunningham)"></i>
-                    <label class="mr-1" for="enslavedBy">Enslaved By:</label>
-                    <input class="mr-2 form-item-input" onkeypress="updateStringHandler()" type="text"
-                        class="form-control" id="enslavedBy">
 
 
-                </div>
-            </div>
+            </form>
 
+        </main>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+            integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="js/script.js"></script>
+    </body>
 
-        </form>
-
-    </main>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
-        integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="js/script.js"></script>
-</body>
-
-</html>
+</htms>
