@@ -23,22 +23,11 @@ const updateStringHandler = (inputElement) => {
     secondaryNameSpan.innerText = `(${secondaryLastNames}${secondaryFirstName}${secondaryMiddleName})`
 }
 
-//handle is name unknown checkbox - reveal select
-const unknownCheckBox = document.querySelector('.unknown-item-toggle')
-unknownCheckBox.addEventListener('change', () => {
-    if (unknownCheckBox.checked) {
-        unknownNameSpan.innerText = '[Unnamed Person]'
-        $('#unknownNameSelect, .unknown-name-span').fadeIn()
-        $('.last-name-section, .first-name-section, .middle-name-section, .additional-names-section, .title-section').fadeOut();
-    } else {
-        $('#unknownNameSelect, .unknown-name-span').fadeOut()
-        $('.last-name-section, .first-name-section, .middle-name-section, .additional-names-section, .title-section').fadeIn();
-    }
-})
+//is name unknown? checkbox handler
+document.querySelector('.unknown-item-toggle').addEventListener('change', unknownNameBoxHandler)
 
-//unnamed select options handler
-const unknownNameSelect = document.querySelector('#unknownNameSelect')
-unknownNameSelect.addEventListener('change', () => {
+//unknown person type select that shows up if above is run ^
+document.querySelector('#unknownNameSelect').addEventListener('change', () => {
     unknownNameSpan.innerText = `[${unknownNameSelect.value}]`
 })
 
@@ -67,5 +56,5 @@ const hideItemToggle = document.querySelectorAll('.hide-item-toggle').forEach(it
 
 
 const testInputVal = 'david james'
-const testInputArr = testInputVal.split(' ').map(str=>str.slice(0,1).toUpperCase() + '.').join(' ')
+const testInputArr = testInputVal.split(' ').map(str => str.slice(0, 1).toUpperCase() + '.').join(' ')
 console.log(testInputArr)
