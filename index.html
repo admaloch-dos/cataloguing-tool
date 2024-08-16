@@ -23,8 +23,12 @@
 
         <main id="cataloguing-container" class="container mt-5">
             <div class="preview d-flex align-items-center">
-                <span class="unknown-name-span"></span><span class="preferred-name-span">
-                </span><span class="secondary-name-span"></span><span class="years-span"></span>
+                <span class="unknown-name-span"></span>
+                <span class="preferred-name-span"></span>
+                <span class="infant-span"></span>
+
+                <span class="secondary-name-span"></span>
+                <span class="years-span"></span>
                 <span class="enslaved-span"></span>
             </div>
             <form action="" class="form-group">
@@ -51,7 +55,7 @@
 
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="lastName">
-                        <div class="checked-boxes">
+                        <div class="checked-boxes d-none">
                             <input type="checkbox" class="btn-check preferred-btn" id="btn-check-1" autocomplete="off">
                             <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check-1"><i
                                     class="fa-solid fa-p fa-style"></i></label>
@@ -69,7 +73,7 @@
 
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="penNameLast">
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -91,7 +95,7 @@
 
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="anglicizedLastName">
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -111,10 +115,10 @@
                     <h3>First Name</h3>
                     <!-- First Name Input -->
                     <div class="input-item input-group d-flex align-items-center">
-                        <label class="me-1" for="firstName">First Name:</label>
+                        <label class="me-1" for="firstNameInput">First Name:</label>
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
-                            class="form-control" id="firstName">
-                        <div class="check-boxes d-flex">
+                            class="form-control" id="firstNameInput">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -132,20 +136,21 @@
                         <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
                             data-bs-placement="top" data-bs-trigger="hover"
                             data-bs-content="Ex. Gray, R.A. (Robert Alan)"></i>
-                        <label class="me-1" for="firstName">Initial preferred:</label>
+                        <label class="me-1" for="firstInitialInput">Initial preferred:</label>
 
                         <div class="check-boxes d-flex">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
                             </label>
-                            <input type="checkbox" class="btn-check preferred-btn" id="firstInitBtn" autocomplete="off">
-                            <label class="btn btn-outline-dark btn-sm custom-btn" for="firstInitBtn"><i
+                            <input type="checkbox" class="btn-check preferred-btn" id="firstInitialBtn"
+                                autocomplete="off">
+                            <label class="btn btn-outline-dark btn-sm custom-btn" for="firstInitialBtn"><i
                                     class="fa-solid fa-p fa-style"></i></label>
 
                         </div>
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
-                            class="form-control" id="firstInitial">
+                            class="form-control" id="firstInitialInput">
 
                     </div>
 
@@ -157,7 +162,7 @@
                         <label class="me-1" for="preferredShortname">Preferred Shortname:</label>
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="preferredShortname">
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -179,7 +184,7 @@
 
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="penNameFirst">
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -200,7 +205,7 @@
 
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="anglicizedNameFirst">
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -223,7 +228,7 @@
 
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="nickname">
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -258,7 +263,7 @@
                         <label class="me-1" for="middle-name">Middle Name(s):</label>
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="middle-name">
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -276,14 +281,19 @@
                             data-bs-placement="top" data-bs-trigger="hover"
                             data-bs-content="Ex. Gray, R.A. (Robert Alan)"></i>
                         <label class="me-1" for="initials-preferred">Initial(s) preferred:</label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
-                        </label>
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
-                            <span class="custom-label"></span>
-                            <input type="checkbox" class="show-item-checkbox ms-1 P-toggle">
-                        </label>
+                        <div class="check-boxes d-flex">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <input type="checkbox" class="btn-check preferred-btn" id="middleInititialBtn"
+                                autocomplete="off">
+                            <label class="btn btn-outline-dark btn-sm custom-btn" for="middleInititialBtn"><i
+                                    class="fa-solid fa-p fa-style"></i></label>
+
+                        </div>
+                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                            class="form-control" id="middleInitialInput">
 
 
                     </div>
@@ -295,7 +305,7 @@
                         <label class="me-1" for="anglicized-name-middle">Anglicized Name(Middle):</label>
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="anglicized-name-middle">
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -321,7 +331,7 @@
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="maidenName">
 
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -343,7 +353,7 @@
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="additionalLastNames">
 
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -365,7 +375,7 @@
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="suffixes">
 
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
@@ -415,7 +425,7 @@
                         <label class="me-1" for="birthDate">Birth Date:</label>
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="birthDate">
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Ca.</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 circa-before-toggle">
@@ -439,7 +449,7 @@
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="deathDate">
 
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Ca.</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 circa-before-toggle">
@@ -462,7 +472,7 @@
                         <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="flourished">
 
-                        <div class="check-boxes d-flex">
+                        <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
                                 <span class="custom-label">Ca.</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 circa-before-toggle">
@@ -519,7 +529,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
             integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="js/handlePreferredInitial.js"></script>
+
+        <script src="js/nameHandlers.js"></script>
+        <script src="js/unknownName.js"></script>
+        <script src="js/handlePreferedInput.js"></script>
+        <script src="js/handlePreferredBtn.js"></script>
+        <script src="js/hideAndRevealItems.js"></script>
+        <script src="js/infantCheckhandler.js"></script>
         <script src="js/script.js"></script>
+
+
     </body>
 
 </htms>

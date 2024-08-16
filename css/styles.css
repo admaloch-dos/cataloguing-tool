@@ -11,13 +11,15 @@ label {
     margin-bottom: 0;
 }
 
-input, select {
+input,
+select {
     height: 23px;
 }
 
 .info-icon {
     cursor: pointer;
-    font-size: 17px; /* Adjust size as needed */
+    font-size: 17px;
+    /* Adjust size as needed */
 }
 
 h3 {
@@ -64,12 +66,9 @@ h3 {
     top: .05rem;
 }
 
-#firstInitial {
- height: 0;
- width: 0;
- opacity: 0;
+#middleInitialInput,
+#firstInitialInput {
+    height: 0;
+    width: 0;
+    opacity: 0;
 }
-
-
-
-
