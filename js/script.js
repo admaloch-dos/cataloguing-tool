@@ -13,16 +13,14 @@ let enslavedSpan = document.querySelector('.enslaved-span')
 //main update string handler-- listens for every text input
 const updateStringHandler = (inputElement) => {
 
-    revealFirstNameOptions(inputElement) //if first name input filled - reveal initial or shortened name option
-    unknownSpanHandler()
-    let currSection = ''
-    currSection = inputElement ? inputElement.closest('.main-section').id : ''
+    revealExtraNameOptions(inputElement) //if first name input filled - reveal initial or shortened name option
 
     const { preferred: preferredLastName, secondary: secondaryLastNames } = lastNameHandler()
     const { preferred: preferredFirstName, secondary: secondaryFirstName } = firstNameHandler()
+    const { preferred: preferredMiddleName, secondary: secondaryMiddleName } = middleNameHandler()
 
-    preferredNameSpan.innerText = `${preferredLastName}${preferredFirstName}`
-    secondaryNameSpan.innerText = `(${secondaryLastNames}${secondaryFirstName})`
+    preferredNameSpan.innerText = `${preferredLastName}${preferredFirstName}${preferredMiddleName}`
+    secondaryNameSpan.innerText = `(${secondaryLastNames}${secondaryFirstName}${secondaryMiddleName})`
 }
 
 const lastNameHandler = () => {
@@ -33,26 +31,30 @@ const firstNameHandler = () => {
     const firstNameSection = document.querySelector('.first-name-section')
     return genStrings(firstNameSection)
 }
+const middleNameHandler = () => {
+    const middleNameSection = document.querySelector('.middle-name-section')
+    return genStrings(middleNameSection)
+}
 
-
-
-
-
-
-//for unknown checkbox
-const unknownSpanHandler = () => {
-    const unknownCheckBox = document.querySelector('.unknown-item-toggle')
-    const unknownNameSelect = document.querySelector('#unknownNameSelect')
-    // console.log(unknownNameSelect)
+//handle is name unknown checkbox - reveal select
+const unknownCheckBox = document.querySelector('.unknown-item-toggle')
+unknownCheckBox.addEventListener('change', () => {
     if (unknownCheckBox.checked) {
-        unknownNameSpan.innerText = `[${unknownNameSelect.value}]`
+        unknownNameSpan.innerText = '[Unnamed Person]'
         $('#unknownNameSelect, .unknown-name-span').fadeIn()
         $('.last-name-section, .first-name-section, .middle-name-section, .additional-names-section, .title-section').fadeOut();
     } else {
         $('#unknownNameSelect, .unknown-name-span').fadeOut()
         $('.last-name-section, .first-name-section, .middle-name-section, .additional-names-section, .title-section').fadeIn();
     }
-}
+})
+
+//unnamed select options handler
+const unknownNameSelect = document.querySelector('#unknownNameSelect')
+unknownNameSelect.addEventListener('change', () => {
+    unknownNameSpan.innerText = `[${unknownNameSelect.value}]`
+})
+
 
 
 //utility func for generating string for last/first/middle names preferred and secondary
@@ -107,12 +109,19 @@ const formInputItems = document.querySelectorAll('.form-item-input').forEach(inp
     })
 })
 
-const revealFirstNameOptions = (inputElement) => {
+const revealExtraNameOptions = (inputElement) => {
     if (inputElement && inputElement.id === 'firstName') {
         if (inputElement.value.length > 2) {
             $('#first-init-preferred-item, #preferred-shortname-item').removeClass('d-none').addClass('d-flex');
         } else {
             $('#first-init-preferred-item, #preferred-shortname-item').removeClass('d-flex').addClass('d-none');
+        }
+    }
+    if (inputElement && inputElement.id === 'middle-name') {
+        if (inputElement.value.length > 2) {
+            $('#mid-init-preferred-item').removeClass('d-none').addClass('d-flex');
+        } else {
+            $('#mid-init-preferred-item').removeClass('d-flex').addClass('d-none');
         }
     }
 }
