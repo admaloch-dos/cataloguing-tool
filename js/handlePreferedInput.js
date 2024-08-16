@@ -16,6 +16,7 @@ const setCurrInputAsDefault = (input) => {
 
 // if the current preferred input is erased, search for the first input that has text
 const resetPreferredInput = (input) => {
+    console.log(input)
     const parentContainer = input.closest('.name-section')
     const filledInput = Array.from(parentContainer.querySelectorAll('.form-item-input')).find(input => input.value.length > 0);
     if (filledInput) {

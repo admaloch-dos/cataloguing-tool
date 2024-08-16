@@ -37,7 +37,7 @@
                     <label class="custom-checkbox d-flex justify-content-center align-items-center me-2"
                         for="unknown-checkbox">
                         <span class="custom-label">Is name unknown?:</span>
-                        <input id="unknown-checkbox"  type="checkbox"
+                        <input id="unknown-checkbox" type="checkbox"
                             class="show-item-checkbox ms-1 unknown-item-toggle">
                     </label>
                     <select id="unknownNameSelect">
@@ -319,7 +319,7 @@
                     </div>
                 </div>
 
-                <div id="additional-names-section" class="additional-names-section main-section ">
+                <div id="additional-names-section" class="additional-names-section main-section name-section">
                     <h3>Additional Names</h3>
 
                     <!-- Maiden Name -->
@@ -371,24 +371,38 @@
                         <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
                             data-bs-placement="top" data-bs-trigger="hover"
                             data-bs-content="Jr., Sr. or II, III etc.. Ex. King, Martin Luther, Jr., 1929-1968"></i>
-                        <label class="me-1" for="suffixes">Suffixes:</label>
+
+                        <select id="suffixSelect" name="suffixSelect">
+                            <option value="">Select a suffix</option>
+                            <option value="Jr.">Jr.</option>
+                            <option value="Sr.">Sr.</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                            <option value="V">V</option>
+                            <option value="VI">VI</option>
+                            <option value="VII">VII</option>
+                            <option value="VIII">VIII</option>
+                        </select>
                         <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
-                            class="form-control" id="suffixes">
+                            class="form-control" id="suffixInput">
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <input type="checkbox" class="btn-check preferred-btn" id="suffix-preferred-btn"
+                                autocomplete="off">
+                            <label class="btn btn-outline-dark btn-sm custom-btn" for="suffix-preferred-btn"><i
+                                    class="fa-solid fa-p fa-style"></i></label>
 
-                            <div class="check-boxes d-none">
-                                <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
-                                    <span class="custom-label">Hide</span>
-                                    <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
-                                </label>
-                                <input type="checkbox" class="btn-check preferred-btn" id="btn-check-13" autocomplete="off">
-                                <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check-13"><i
-                                        class="fa-solid fa-p fa-style"></i></label>
+                        </div>
 
-                            </div>
+
                     </div>
                 </div>
 
-                <div id="title-section" class="title-section main-section ">
+                <div id="title-section" class="title-section main-section name-section">
                     <h3>Titles</h3>
 
                     <!-- Title -->
@@ -397,10 +411,16 @@
                         <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="title">
 
-                        <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
-                            <span class="custom-label">Hide</span>
-                            <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle" checked>
-                        </label>
+                            <div class="check-boxes d-none">
+                                <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                    <span class="custom-label">Hide</span>
+                                    <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                                </label>
+                                <input type="checkbox" class="btn-check preferred-btn" id="btn-check-12" autocomplete="off">
+                                <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check-12"><i
+                                        class="fa-solid fa-p fa-style"></i></label>
+
+                            </div>
                     </div>
 
                     <!-- Indigenous Name -->
@@ -412,8 +432,18 @@
                         <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="indigenousName">
 
+                            <div class="check-boxes d-none">
+                                <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                    <span class="custom-label">Hide</span>
+                                    <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                                </label>
+                                <input type="checkbox" class="btn-check preferred-btn" id="btn-check-12" autocomplete="off">
+                                <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check-12"><i
+                                        class="fa-solid fa-p fa-style"></i></label>
 
+                            </div>
                     </div>
+
                 </div>
 
                 <div id="years-section" class="years-section main-section">
@@ -531,6 +561,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
             integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="js/utils.js"></script>
         <script src="js/handlePreferredInitial.js"></script>
 
         <script src="js/nameHandlers.js"></script>
@@ -539,6 +570,7 @@
         <script src="js/handlePreferredBtn.js"></script>
         <script src="js/hideAndRevealItems.js"></script>
         <script src="js/infantCheckhandler.js"></script>
+        <script src="js/suffixSelectHandler.js"></script>
         <script src="js/script.js"></script>
 
 

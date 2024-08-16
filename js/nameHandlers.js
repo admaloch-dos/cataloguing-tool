@@ -15,6 +15,10 @@ const extraNamesHandler = () => {
     const additionalNamesSection = document.querySelector('.additional-names-section')
     return genStrings(additionalNamesSection)
 }
+const titlesHandler = () => {
+    const titleNameSection = document.querySelector('.title-section')
+    return genStrings(titleNameSection)
+}
 
 //utility func for generating string for last/first/middle names preferred and secondary
 const genStrings = (container) => {
@@ -43,13 +47,7 @@ const formatStrings = (input) => {
     const upperCaseVal = inputVal.slice(0, 1).toUpperCase() + inputVal.slice(1)
     if (input.id === 'nickname') {
         return `'${upperCaseVal}'`
-    } else if (input.id === 'suffixes') {
-        const lowerCaseSuffix = input.value.toLowercase()
-        if (lowerCaseSuffix === 'jr' || lowerCaseSuffix === 'jr.' || lowerCaseSuffix === 'sr' || lowerCaseSuffix === 'sr.') {
-            return upperCaseVal.includes('.') ? upperCaseVal : `${upperCaseVal}.`
-        }
-
-    } else if (input.id === 'middle-name' || input.id === 'additionalLastNames') {
+    }  else if (input.id === 'middle-name' || input.id === 'additionalLastNames' || input.id === 'indigenousName' || input.id === 'title') {
         return inputVal.split(' ')
             .map(str => str.slice(0, 1).toUpperCase() + str.slice(1))
             .join(' ');
