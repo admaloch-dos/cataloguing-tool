@@ -10,33 +10,32 @@ let secondaryNameSpan = document.querySelector('.secondary-name-span')
 let yearsSpan = document.querySelector('.years-span')
 let enslavedSpan = document.querySelector('.enslaved-span')
 
-
+//main update string handler-- listens for every text input
 const updateStringHandler = (inputElement) => {
+
+    revealFirstNameOptions(inputElement) //if first name input filled - reveal initial or shortened name option
     unknownSpanHandler()
     let currSection = ''
     currSection = inputElement ? inputElement.closest('.main-section').id : ''
 
-    console.log(inputElement)
+    const { preferred: preferredLastName, secondary: secondaryLastNames } = lastNameHandler()
+    const { preferred: preferredFirstName, secondary: secondaryFirstName } = firstNameHandler()
 
-    const { preferred: preferredLastName, secondary: secondaryLastNames } = lastNameHandler(inputElement)
-    const { preferred: preferredFirstName, secondary: secondaryFirstName } = firstNameHandler(inputElement)
-
-    // console.log('preferredFirstName', preferredFirstName)
-    // console.log('secondaryFirstName', secondaryFirstName)
-
-    preferredNameSpan.innerText = `${preferredLastName}, ${preferredFirstName}`
+    preferredNameSpan.innerText = `${preferredLastName}${preferredFirstName}`
     secondaryNameSpan.innerText = `(${secondaryLastNames}${secondaryFirstName})`
 }
 
-const lastNameHandler = (inputElement) => {
+const lastNameHandler = () => {
     const lastNameSection = document.querySelector('.last-name-section')
-    return genStrings(lastNameSection, inputElement)
+    return genStrings(lastNameSection)
+}
+const firstNameHandler = () => {
+    const firstNameSection = document.querySelector('.first-name-section')
+    return genStrings(firstNameSection)
 }
 
-const firstNameHandler = (inputElement) => {
-    const firstNameSection = document.querySelector('.first-name-section')
-    return genStrings(firstNameSection, inputElement)
-}
+
+
 
 
 
@@ -57,19 +56,17 @@ const unknownSpanHandler = () => {
 
 
 //utility func for generating string for last/first/middle names preferred and secondary
-const genStrings = (container, inputElement) => {
+const genStrings = (container) => {
 
     let preferred = '';
     let secondary = '';
     container.querySelectorAll('.preferred-btn').forEach(btn => {
         const textInput = btn.closest('.input-item').querySelector('.form-item-input')
-        console.log(textInput)
+        // console.log(textInput)
         if (!textInput) return
-        const textValue = textInput.value
-        const formattedInputVal = textValue.slice(0, 1).toUpperCase() + textValue.slice(1)
-        const testInputVal = formatStrings(textInput)
-        if (textValue && textValue.length > 1) {
-
+        const formattedInputVal = textInput.value.length > 0 && formatStrings(textInput)
+        if (formattedInputVal && formattedInputVal.length > 0) {
+            // console.log(formattedInputVal)
             if (btn.checked) {
                 preferred = formattedInputVal
             } else {
@@ -80,8 +77,14 @@ const genStrings = (container, inputElement) => {
     return { preferred, secondary }
 }
 
+//specially format strings based on specific input id
 const formatStrings = (input) => {
-    // console.log(input)
+    const upperCaseVal = input.value.slice(0, 1).toUpperCase() + input.value.slice(1)
+    if (input.id === 'nickname') {
+        return `'${upperCaseVal}'`
+    } else {
+        return upperCaseVal
+    }
 }
 
 //various funcs/listeners
@@ -104,7 +107,15 @@ const formInputItems = document.querySelectorAll('.form-item-input').forEach(inp
     })
 })
 
-
+const revealFirstNameOptions = (inputElement) => {
+    if (inputElement && inputElement.id === 'firstName') {
+        if (inputElement.value.length > 2) {
+            $('#first-init-preferred-item, #preferred-shortname-item').removeClass('d-none').addClass('d-flex');
+        } else {
+            $('#first-init-preferred-item, #preferred-shortname-item').removeClass('d-flex').addClass('d-none');
+        }
+    }
+}
 
 // if the current preferred input is erased, search for the first input that has text
 const resetPreferredInput = (input) => {
@@ -123,15 +134,30 @@ document.querySelectorAll('.preferred-btn').forEach(btn => {
         const parentContainer = this.closest('.name-section')
         if (parentContainer) {
             const preferredButtons = parentContainer.querySelectorAll('.preferred-btn');
-            preferredButtons.forEach(item => {
-                if (item.id !== this.id && item.checked) {
-                    item.click()
+            preferredButtons.forEach(btn => {
+                if (btn.id !== this.id && btn.checked) {
+                    btn.click()
+                    console.log(this)
                 }
             })
         }
         updateStringHandler()
     });
 })
+
+//handler for first initial btn to populate name field when pressed
+const firstInitBtn = document.querySelector('#firstInitBtn')
+firstInitBtn.addEventListener('input', () => {
+    console.log(firstInitBtn.checked);
+    const initialInput = document.querySelector('#firstInitial')
+    if (firstInitBtn.checked) {
+        const fullName = document.querySelector('#firstName').value
+        initialInput.value = `.${fullName.slice(0, 1).toUpperCase()}`
+    } else {
+        initialInput.value = ''
+    }
+});
+
 
 
 //temporary hide hide toggle
