@@ -18,9 +18,13 @@ const updateStringHandler = (inputElement) => {
     const { preferred: preferredLastName, secondary: secondaryLastNames } = lastNameHandler()
     const { preferred: preferredFirstName, secondary: secondaryFirstName } = firstNameHandler()
     const { preferred: preferredMiddleName, secondary: secondaryMiddleName } = middleNameHandler()
+    const { preferred: preferredExtraNames, secondary: secondaryExtraNames } = extraNamesHandler()
 
-    preferredNameSpan.innerText = `${preferredLastName}${preferredFirstName}${preferredMiddleName}`
-    secondaryNameSpan.innerText = `(${secondaryLastNames}${secondaryFirstName}${secondaryMiddleName})`
+    console.log(preferredExtraNames,
+        secondaryExtraNames)
+
+    preferredNameSpan.innerText = `${preferredLastName}${preferredFirstName}${preferredMiddleName}${preferredExtraNames}`
+    secondaryNameSpan.innerText = `(${secondaryLastNames}${secondaryFirstName}${secondaryMiddleName}${secondaryExtraNames})`
 }
 
 //is name unknown? checkbox handler
@@ -55,6 +59,6 @@ const hideItemToggle = document.querySelectorAll('.hide-item-toggle').forEach(it
 
 
 
-const testInputVal = 'david james'
-const testInputArr = testInputVal.split(' ').map(str => str.slice(0, 1).toUpperCase() + '.').join(' ')
-console.log(testInputArr)
+// const testInputVal = 'david james'
+// const testInputArr = testInputVal.split(' ').map(str => str.slice(0, 1).toUpperCase() + '.').join(' ')
+// console.log(testInputArr)

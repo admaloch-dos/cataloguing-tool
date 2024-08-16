@@ -5,10 +5,15 @@ const unknownNameBoxHandler = () => {
         unknownNameSpan.innerText = '[Unnamed Person]'
         $('#unknownNameSelect, .unknown-name-span').fadeIn()
         $('.last-name-section, .first-name-section, .middle-name-section, .additional-names-section, .title-section').fadeOut();
+        preferredNameSpan.innerText = ''
+        infantSpan.innerText = ''
+        secondaryNameSpan.innerText = ''
     } else {
         $('#unknownNameSelect, .unknown-name-span').fadeOut()
         $('.last-name-section, .first-name-section, .middle-name-section, .additional-names-section, .title-section').fadeIn();
+        unknownNameSpan.innerText = ''
     }
 }
+
 
 

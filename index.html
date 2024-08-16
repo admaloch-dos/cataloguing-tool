@@ -37,10 +37,10 @@
                     <label class="custom-checkbox d-flex justify-content-center align-items-center me-2"
                         for="unknown-checkbox">
                         <span class="custom-label">Is name unknown?:</span>
-                        <input id="unknown-checkbox" onClick="updateStringHandler(this)" type="checkbox"
+                        <input id="unknown-checkbox"  type="checkbox"
                             class="show-item-checkbox ms-1 unknown-item-toggle">
                     </label>
-                    <select onChange="updateStringHandler(this)" id="unknownNameSelect">
+                    <select id="unknownNameSelect">
                         <option value="Unnamed Person">Unnamed Person</option>
                         <option value="Unnamed Female">Unnamed Female</option>
                         <option value="Unnamed Male">Unnamed Male</option>
@@ -53,7 +53,7 @@
                     <div class="input-item input-group d-flex  align-items-center">
                         <label class="me-1" for="lastName">Last Name:</label>
 
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="lastName">
                         <div class="checked-boxes d-none">
                             <input type="checkbox" class="btn-check preferred-btn" id="btn-check-1" autocomplete="off">
@@ -71,7 +71,7 @@
                             data-bs-content="Pen name ex. Twain, Mark (Clemens, Samuel Langhorne), 1835-1910"></i>
                         <label class="me-1" for="penNameLast">Pen Name(last):</label>
 
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="penNameLast">
                         <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
@@ -93,7 +93,7 @@
                             data-bs-content="Anglicized name ex. Copernicus, Nicholas (Kopernik, Mikołaj), 1473-1543"></i>
                         <label class="me-1" for="anglicizedLastName">Anglicized Name(last):</label>
 
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="anglicizedLastName">
                         <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
@@ -116,7 +116,7 @@
                     <!-- First Name Input -->
                     <div class="input-item input-group d-flex align-items-center">
                         <label class="me-1" for="firstNameInput">First Name:</label>
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="firstNameInput">
                         <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
@@ -149,7 +149,7 @@
                                     class="fa-solid fa-p fa-style"></i></label>
 
                         </div>
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="firstInitialInput">
 
                     </div>
@@ -160,7 +160,7 @@
                             data-bs-placement="top" data-bs-trigger="hover"
                             data-bs-content="Ex. Franklin, Ben (Benjamin), 1706-1790"></i>
                         <label class="me-1" for="preferredShortname">Preferred Shortname:</label>
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="preferredShortname">
                         <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
@@ -182,7 +182,7 @@
                             data-bs-content="Pen name ex. Twain, Mark (Clemens, Samuel Langhorne), 1835-1910"></i>
                         <label class="me-1" for="penNameFirst">Pen Name (First):</label>
 
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="penNameFirst">
                         <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
@@ -203,7 +203,7 @@
                             data-bs-content="Anglicized name ex. Copernicus, Nicholas (Kopernik, Mikołaj), 1473-1543"></i>
                         <label class="me-1" for="anglicizedNameFirst">Anglicized Name (First):</label>
 
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="anglicizedNameFirst">
                         <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
@@ -226,7 +226,7 @@
                             data-bs-content="Ex. Boltin, 'Cousin Thelma' (Thelma Ann), 1904-1993"></i>
                         <label class="me-1" for="nickname">Nickname:</label>
 
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="nickname">
                         <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
@@ -261,7 +261,7 @@
                     <!-- middle name -->
                     <div class="input-item input-group d-flex align-items-center">
                         <label class="me-1" for="middle-name">Middle Name(s):</label>
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="middle-name">
                         <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
@@ -292,7 +292,7 @@
                                     class="fa-solid fa-p fa-style"></i></label>
 
                         </div>
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="middleInitialInput">
 
 
@@ -303,7 +303,7 @@
                             data-bs-placement="top" data-bs-trigger="hover"
                             data-bs-content="Anglicized name ex. Copernicus, Nicholas (Kopernik, Mikołaj), 1473-1543"></i>
                         <label class="me-1" for="anglicized-name-middle">Anglicized Name(Middle):</label>
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="anglicized-name-middle">
                         <div class="check-boxes d-none">
                             <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
@@ -328,7 +328,7 @@
                             data-bs-placement="top" data-bs-trigger="hover"
                             data-bs-content="Vereen, Annie Pauline Shelley Gwynn, 1916-2002"></i>
                         <label class="me-1" for="maidenName">Maiden Name:</label>
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="maidenName">
 
                         <div class="check-boxes d-none">
@@ -350,7 +350,7 @@
                             data-bs-placement="top" data-bs-trigger="hover"
                             data-bs-content="Typically a woman's married names Ex. Vereen, Annie Pauline Shelley Gwynn, 1916-2002"></i>
                         <label class="me-1" for="additionalLastNames">Additional Last Names:</label>
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="additionalLastNames">
 
                         <div class="check-boxes d-none">
@@ -372,17 +372,19 @@
                             data-bs-placement="top" data-bs-trigger="hover"
                             data-bs-content="Jr., Sr. or II, III etc.. Ex. King, Martin Luther, Jr., 1929-1968"></i>
                         <label class="me-1" for="suffixes">Suffixes:</label>
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="suffixes">
 
-                        <div class="check-boxes d-none">
-                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
-                                <span class="custom-label">Hide</span>
-                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
-                            </label>
+                            <div class="check-boxes d-none">
+                                <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                    <span class="custom-label">Hide</span>
+                                    <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                                </label>
+                                <input type="checkbox" class="btn-check preferred-btn" id="btn-check-13" autocomplete="off">
+                                <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check-13"><i
+                                        class="fa-solid fa-p fa-style"></i></label>
 
-
-                        </div>
+                            </div>
                     </div>
                 </div>
 
@@ -392,7 +394,7 @@
                     <!-- Title -->
                     <div class="input-item input-group d-flex align-items-center">
                         <label class="me-1" for="title">Title:</label>
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="title">
 
                         <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
@@ -407,7 +409,7 @@
                             data-bs-placement="top" data-bs-trigger="hover"
                             data-bs-content="Hillis Hodjo (Francis the Prophet), ca. 1770-1818"></i>
                         <label class="me-1" for="indigenousName">Indigenous Name:</label>
-                        <input class="me-2 form-item-input" oninput="updateStringHandler(this)" type="text"
+                        <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="indigenousName">
 
 
