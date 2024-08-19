@@ -48,7 +48,7 @@
                     </select>
                 </div>
 
-                <div id="last-name-section" class="last-name-section main-section name-section">
+                <div id="last-name-section" class="last-name-section main-section name-section single-preferred-name">
                     <h3>Last Name</h3>
                     <div class="input-item input-group d-flex  align-items-center">
                         <label class="me-1" for="lastName">Last Name:</label>
@@ -65,7 +65,7 @@
 
                     </div>
 
-                    <div class="input-item input-group d-flex  align-items-center">
+                    <div id="last-pen-name" class="input-item input-group d-flex  align-items-center">
                         <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
                             data-bs-placement="top" data-bs-trigger="hover"
                             data-bs-content="Pen name ex. Twain, Mark (Clemens, Samuel Langhorne), 1835-1910"></i>
@@ -87,7 +87,7 @@
 
                     </div>
 
-                    <div class="input-item input-group d-flex  align-items-center">
+                    <div id="last-anglicized-name" class="input-item input-group d-flex  align-items-center">
                         <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
                             data-bs-placement="top" data-bs-trigger="hover"
                             data-bs-content="Anglicized name ex. Copernicus, Nicholas (Kopernik, Mikołaj), 1473-1543"></i>
@@ -111,7 +111,8 @@
 
                 </div>
 
-                <div id="first-name-section" class="first-name-section main-section name-section">
+                <div id="first-name-section"
+                    class="first-name-section main-section name-section single-preferred-name first-or-middle-section">
                     <h3>First Name</h3>
                     <!-- First Name Input -->
                     <div class="input-item input-group d-flex align-items-center">
@@ -242,6 +243,9 @@
 
                     </div>
 
+
+                </div>
+                <div id="infant-section" class=" main-section name-section single-preferred-name">
                     <!-- Infant -->
                     <div class="input-item input-group d-flex align-items-center">
                         <i class="fas fa-info-circle info-icon me-1" data-bs-container="body" data-bs-toggle="popover"
@@ -250,13 +254,15 @@
                         <label class="me-1" for="infant">Infant:</label>
 
 
-                        <input type="checkbox" class="preferred-btn" id="btn-check-infant" name="btn-check-infant">
+                        <input type="checkbox" id="btn-check-infant" name="btn-check-infant">
 
 
                     </div>
                 </div>
 
-                <div id="middle-name-section" class="middle-name-section main-section name-section">
+
+                <div id="middle-name-section"
+                    class="first-or-middle-section middle-name-section main-section name-section single-preferred-name">
                     <h3>Middle Name</h3>
                     <!-- middle name -->
                     <div class="input-item input-group d-flex align-items-center">
@@ -402,25 +408,25 @@
                     </div>
                 </div>
 
-                <div id="title-section" class="title-section main-section name-section">
+                <div id="title-section" class="title-section main-section name-section single-preferred-name">
                     <h3>Titles</h3>
 
                     <!-- Title -->
-                    <div class="input-item input-group d-flex align-items-center">
+                    <div id="title-input-container" class="input-item input-group d-flex align-items-center">
                         <label class="me-1" for="title">Title:</label>
                         <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="title">
 
-                            <div class="check-boxes d-none">
-                                <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
-                                    <span class="custom-label">Hide</span>
-                                    <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
-                                </label>
-                                <input type="checkbox" class="btn-check preferred-btn" id="btn-check-12" autocomplete="off">
-                                <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check-12"><i
-                                        class="fa-solid fa-p fa-style"></i></label>
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <input type="checkbox" class="btn-check preferred-btn" id="btn-check-12" autocomplete="off">
+                            <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check-12"><i
+                                    class="fa-solid fa-p fa-style"></i></label>
 
-                            </div>
+                        </div>
                     </div>
 
                     <!-- Indigenous Name -->
@@ -432,16 +438,16 @@
                         <input class="me-2 form-item-input name-input" oninput="updateStringHandler(this)" type="text"
                             class="form-control" id="indigenousName">
 
-                            <div class="check-boxes d-none">
-                                <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
-                                    <span class="custom-label">Hide</span>
-                                    <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
-                                </label>
-                                <input type="checkbox" class="btn-check preferred-btn" id="btn-check-12" autocomplete="off">
-                                <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check-12"><i
-                                        class="fa-solid fa-p fa-style"></i></label>
+                        <div class="check-boxes d-none">
+                            <label class="custom-checkbox d-flex justify-content-center align-items-center me-2">
+                                <span class="custom-label">Hide</span>
+                                <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
+                            </label>
+                            <input type="checkbox" class="btn-check preferred-btn" id="btn-check-13" autocomplete="off">
+                            <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check-13"><i
+                                    class="fa-solid fa-p fa-style"></i></label>
 
-                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -564,10 +570,10 @@
         <script src="js/utils.js"></script>
         <script src="js/handlePreferredInitial.js"></script>
 
-        <script src="js/nameHandlers.js"></script>
+        <script src="js/updateNamePreviews.js"></script>
+        <script src="js/updateYearPreviews.js"></script>
         <script src="js/unknownName.js"></script>
         <script src="js/handlePreferedInput.js"></script>
-        <script src="js/handlePreferredBtn.js"></script>
         <script src="js/hideAndRevealItems.js"></script>
         <script src="js/infantCheckhandler.js"></script>
         <script src="js/suffixSelectHandler.js"></script>

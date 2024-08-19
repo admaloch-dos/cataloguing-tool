@@ -12,7 +12,6 @@ let enslavedSpan = document.querySelector('.enslaved-span')
 
 //main update string handler-- listens for every text input
 const updateStringHandler = (inputElement) => {
-    // console.log(inputElement)
     setCurrInputAsDefault(inputElement) // when new input is typed in it sets that as new preferred
     revealExtraNameOptions(inputElement) //if first name input filled - reveal initial or shortened name option
 
@@ -47,13 +46,16 @@ document.querySelectorAll('.preferred-btn').forEach(btn => {
 
 //listner for initial btn for first name
 document.querySelector('#firstInitialBtn').addEventListener('input', handleFirstInitialPreferred)
-
+//middle initial checkbox
 document.querySelector('#middleInititialBtn').addEventListener('input', handleMiddleInitialPreferred)
 
+//infant checkbox handler
 document.querySelector('#btn-check-infant').addEventListener('input', infantCheckHandler)
 
 //unknown person type select that shows up if above is run ^
 document.querySelector('#suffixSelect').addEventListener('change', suffixSelectHandler)
+
+
 
 //temporary hide hide toggle
 const hideItemToggle = document.querySelectorAll('.hide-item-toggle').forEach(item => {
