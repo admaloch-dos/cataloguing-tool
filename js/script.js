@@ -1,6 +1,6 @@
+//bootstrap popover init
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-
 
 // form data entry
 let unknownNameSpan = document.querySelector('.unknown-name-span')
@@ -10,61 +10,70 @@ let secondaryNameSpan = document.querySelector('.secondary-name-span')
 let yearsSpan = document.querySelector('.years-span')
 let enslavedSpan = document.querySelector('.enslaved-span')
 
-//main update string handler-- listens for every text input
-const updateStringHandler = (inputElement) => {
-    setCurrInputAsDefault(inputElement) // when new input is typed in it sets that as new preferred
-    revealExtraNameOptions(inputElement) //if first name input filled - reveal initial or shortened name option
+//main listener for any name inputs, last, first, middle, additional, titles
+//all logic/helper funcs related to this exported to updateNameInputs.js
+document.querySelectorAll('.name-input').forEach(nameInput =>
+    nameInput.addEventListener('input', () => {
+        nameInputsHandler(nameInput)
+    })
+);
 
-    const { preferred: preferredLastName, secondary: secondaryLastNames } = lastNameHandler()
-    const { preferred: preferredFirstName, secondary: secondaryFirstName } = firstNameHandler()
-    const { preferred: preferredMiddleName, secondary: secondaryMiddleName } = middleNameHandler()
-    const { preferred: preferredExtraNames, secondary: secondaryExtraNames } = extraNamesHandler()
-    const { preferred: preferredTitleName, secondary: secondaryTitleName } = titlesHandler()
+//main listener for year inputs from form - birth date, death date, flourished
+//all logic/helper funcs related to this exported to updateNameInputs.js
+document.querySelectorAll('.year-input').forEach(yearInput =>
+    yearInput.addEventListener('input', () => {
+        yearInputsHandler(yearInput)
+    })
+);
 
-    preferredNameSpan.innerText = `${preferredTitleName}${preferredLastName}${preferredFirstName}${preferredMiddleName}${preferredExtraNames}`
-    secondaryNameSpan.innerText = `(${secondaryTitleName}${secondaryLastNames}${secondaryFirstName}${secondaryMiddleName}${secondaryExtraNames})`
-}
+//main listener for enslaved input and text input that pops up if clicked
+//all logic/helper funcs related to this exported to updateEnslaved.js
+document.querySelectorAll('.enslaved-input').forEach(input => {
+    input.addEventListener('input', () => {
+        enslavedInputsHandler(input)
+    })
+})
 
-
-
-//is name unknown? checkbox handler
+//main listener for is name unknown checkbox and unknown select options
+//all logic/helper funcs related to this exported to updateUnknownName.js
 document.querySelector('.unknown-item-toggle').addEventListener('change', unknownNameBoxHandler)
+
+
+//main listener for the infant checkbox
+//all logic/helper funcs related to this exported to updateInitialPreferred.js
+document.querySelector('#btn-check-infant').addEventListener('input', infantCheckHandler)
+
 
 //unknown person type select that shows up if above is run ^
 document.querySelector('#unknownNameSelect').addEventListener('change', () => {
     unknownNameSpan.innerText = `[${unknownNameSelect.value}]`
 })
 
-//listen for the preferred btn for last first and middle names and unclick if new one is clicked -- only one item can be preferred
+
+//main listener for initial preffered checkboxes for first and middle name sections
+//all logic/helper funcs related to this exported to updateInitialPreferred.js
+document.querySelector('#firstInitialBtn').addEventListener('input', firstInitialBtnHandler)
+document.querySelector('#middleInititialBtn').addEventListener('input', middleInitialsBtnHandler)
+
+
+//main listener for the suffix select
+//all logic/helper funcs related to this exported to updateSuffixSelect.js
+document.querySelector('#suffixSelect').addEventListener('change', suffixSelectHandler)
+
+
+//main listener for all .preferred-btn checkbox btn inputs - these are for any name related input
+//all logic/helper funcs related to this exported to handlePreferredBtns.js
 document.querySelectorAll('.preferred-btn').forEach(btn => {
     btn.addEventListener('change', function () {
         resetPreferredBtn(this)
-        updateStringHandler()
+        nameInputsHandler() //btn presses triggers the main name input handler ^^ to run and update preffered name span
     });
 })
 
 
-//listner for initial btn for first name
-document.querySelector('#firstInitialBtn').addEventListener('input', handleFirstInitialPreferred)
-//middle initial checkbox
-document.querySelector('#middleInititialBtn').addEventListener('input', handleMiddleInitialPreferred)
-
-//infant checkbox handler
-document.querySelector('#btn-check-infant').addEventListener('input', infantCheckHandler)
-
-//unknown person type select that shows up if above is run ^
-document.querySelector('#suffixSelect').addEventListener('change', suffixSelectHandler)
-
-
-
-//temporary hide hide toggle
+//temporary hide hide btn toggle
 const hideItemToggle = document.querySelectorAll('.hide-item-toggle').forEach(item => {
     item.closest('.custom-checkbox ').classList.remove('d-flex')
     item.closest('.custom-checkbox ').classList.add('d-none')
 })
 
-
-
-// const testInputVal = 'david james'
-// const testInputArr = testInputVal.split(' ').map(str => str.slice(0, 1).toUpperCase() + '.').join(' ')
-// console.log(testInputArr)

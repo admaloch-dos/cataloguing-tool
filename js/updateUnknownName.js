@@ -1,4 +1,6 @@
-//handle is name unknown checkbox - reveal select
+//handle is name unknown checkbox -
+//select is revealed on click to specify if known - male/female etc..
+//this indicates taht all name related inputs are unknown and will be emptied/hidden on click
 const unknownNameBoxHandler = (event) => {
     const itemsToShowOrHide = "#infant-section, #title-section, #last-name-section, #first-name-section, #middle-name-section, #additional-names-section"
     if (event.target.checked) {
@@ -16,16 +18,5 @@ const unknownNameBoxHandler = (event) => {
     }
 }
 
-const clearSectionTextInputs = (sectionTag) => {
-    const sections = document.querySelectorAll(sectionTag)
-    sections.forEach(section => {
-        const inputItems = section.querySelectorAll('.form-item-input')
-        inputItems.forEach(input => {
-            if (input.type === 'text') {
-                input.value = ''
-                triggerEvent(input)
-            }
-        })
-    })
-}
+
 
