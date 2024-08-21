@@ -7,13 +7,12 @@
 const nameInputsHandler = (nameInput) => {
 
     if (nameInput) {
-        hideOrRevealInputs(nameInput) // exported logic to reveal or hide certain inputs in the form on text input
-        setCurrInputAsDefault(nameInput); // When you type a new text input - sets it as the preferred input by clicking P btn
+        revealItemCheckBoxes(nameInput) //show preferred/hide btn options when input has length
+        hideOrRevealInputs(nameInput) // exported logic to reveal or hide certain items based on text input
+        setCurrItemAsPreferred(nameInput); // When you type a new text input - auto click the pref button for htat item
     }
 
-    let nameObj = {
-
-    }
+    let nameObj = {}
 
     const { preferred: preferredLastName, secondary: secondaryLastNames } = lastNameHandler();
     const { preferred: preferredFirstName, secondary: secondaryFirstName } = firstNameHandler();
@@ -132,7 +131,7 @@ const formatNameString = (input) => {
 // When you type a new text input - sets it as the preferred input by clicking P btn
 //this triggers taht btn and logic related to that ben press is triggered
 // logic for btn located at script .preferred-btn input listener or the handle func in handlePreferredBtns.js
-const setCurrInputAsDefault = (input) => {
+const setCurrItemAsPreferred = (input) => {
     if (!input) return
     // console.log(input)
     const checkBoxesContainer = input.nextElementSibling

@@ -1,6 +1,6 @@
 //main funcs/logic pertaining to form year-inputs event listener
 const yearInputsHandler = (yearInput) => {
-    revealInputOptions(yearInput) //reveal curr inputs checkbox options on text input
+    revealItemCheckBoxes(yearInput) //reveal curr inputs checkbox options on text input
     handleEmptyYearInputs(yearInput)//helper func to export some logic for empty input handling
 
     const birthDateStr = genYearString('#birth-date-item')

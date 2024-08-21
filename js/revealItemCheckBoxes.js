@@ -1,5 +1,5 @@
 //helper func - options for each input are hidden by default- on input change they will be revealed
-const revealInputOptions = (input) => {
+const revealItemCheckBoxes = (input) => {
     if (!input) return
     const checkBoxesContainer = input.nextElementSibling
     if (checkBoxesContainer) {
