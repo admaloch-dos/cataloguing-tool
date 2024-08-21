@@ -12,50 +12,61 @@ const nameInputsHandler = (nameInput) => {
         setCurrItemAsPreferred(nameInput); // When you type a new text input - auto click the pref button for htat item
     }
 
-    let nameObj = {}
-
     const { preferred: preferredLastName, secondary: secondaryLastNames } = lastNameHandler();
     const { preferred: preferredFirstName, secondary: secondaryFirstName } = firstNameHandler();
     const { preferred: preferredMiddleName, secondary: secondaryMiddleName } = middleNameHandler();
     const { preferred: preferredExtraNames, secondary: secondaryExtraNames } = extraNamesHandler();
     const { preferred: preferredTitleName, secondary: secondaryTitleName } = titlesHandler();
 
-    // Adding values to nameObj
-    nameObj.lastName = { preferred: preferredLastName, secondary: secondaryLastNames };
-    nameObj.firstName = { preferred: preferredFirstName, secondary: secondaryFirstName };
-    nameObj.middleName = { preferred: preferredMiddleName, secondary: secondaryMiddleName };
-    nameObj.extraNames = { preferred: preferredExtraNames, secondary: secondaryExtraNames };
-    nameObj.titleName = { preferred: preferredTitleName, secondary: secondaryTitleName };
-
-    console.log(nameObj)
-
     const isSecondarySpanEmpty = !secondaryTitleName && !secondaryLastNames && !secondaryFirstName && !secondaryMiddleName && !secondaryExtraNames
 
-    let formattedPLastName = formatPrimaryLastName(preferredLastName, preferredTitleName, preferredFirstName, preferredMiddleName)
-    let formattedPFirstName = formatPrimaryLastName(preferredFirstName, preferredTitleName, preferredFirstName)
+    let nameObj = {
+        lastName: { preferred: preferredLastName, secondary: secondaryLastNames },
+        firstName: { preferred: preferredFirstName, secondary: secondaryFirstName },
+        middleName: { preferred: preferredMiddleName, secondary: secondaryMiddleName },
+        extraNames: { preferred: preferredExtraNames, secondary: secondaryExtraNames },
+        titleName: { preferred: preferredTitleName, secondary: secondaryTitleName }
+    }
 
 
-    preferredNameSpan.innerText = `${preferredTitleName}${formattedPLastName}${preferredFirstName}${preferredMiddleName}${preferredExtraNames}`;
-    secondaryNameSpan.innerText = !isSecondarySpanEmpty ? `(${secondaryTitleName}${secondaryLastNames}${secondaryFirstName}${secondaryMiddleName}${secondaryExtraNames})` : ''
+    nameObj.lastName.preferred = formatPrimaryLastName(nameObj)
+    // let formattedPFirstName = formatPrimaryLastName(preferredFirstName, preferredTitleName, preferredFirstName)
+
+    const { lastName, firstName, middleName, titleName } = nameObj
+
+    preferredNameSpan.innerText = `${preferredTitleName}${lastName.preferred}${preferredFirstName}${preferredMiddleName}${preferredExtraNames}`;
+    secondaryNameSpan.innerText = !isSecondarySpanEmpty ? ` (${secondaryTitleName}${secondaryLastNames}${secondaryFirstName}${secondaryMiddleName}${secondaryExtraNames})` : ''
 }
 
-const formatPrimaryLastName = (preferredLastName, preferredTitleName, preferredFirstName, preferredMiddleName) => {
-    if (!preferredLastName || preferredTitleName) return ''
-    if (preferredFirstName || preferredMiddleName) {
-        return `${preferredLastName}, `
+const formatPrimaryLastName = (nameObj) => {
+    const { lastName, firstName, middleName, titleName } = nameObj
+
+   firstName.preferred && console.log(firstName.preferred)
+
+    if (!lastName.preferred || titleName.preferred) return ''
+
+    if (firstName.preferred || middleName.preferred) {
+        return `${lastName.preferred}, `
     } else {
-        return preferredLastName
+        return lastName.preferred
     }
 }
 
-const formatPrimaryFirstName = (preferredFirstName, preferredTitleName, preferredLastName) => {
-    if (!preferredFirstName || preferredTitleName && preferredLastName) return ''
-    if (preferredLastName || preferredTitleName) {
-        return `${preferredFirstName}, `
-    } else {
-        return preferredFirstName
-    }
-}
+// const formatPrimaryFirstName = (nameObj) => {
+//     const { lastName, firstName, middleName, titleName } = nameObj
+
+//    firstName.preferred && console.log(firstName.preferred)
+
+//     if (!firstName.preferred) return ''
+
+//     if (firstName.preferred || middleName.preferred) {
+//         return `${lastName.preferred}, `
+//     } else {
+//         return lastName.preferred
+//     }
+// }
+
+
 
 //logic for handling hidding or revealing fields on text input
 //ex. first name field reveals initial and shortened name option etc..

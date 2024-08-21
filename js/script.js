@@ -66,7 +66,7 @@ document.querySelector('#suffixSelect').addEventListener('change', suffixSelectH
 document.querySelectorAll('.preferred-btn').forEach(btn => {
     btn.addEventListener('change', function () {
         resetPreferredBtn(this)
-        nameInputsHandler() //btn presses triggers the main name input handler ^^ to run and update preffered name span
+        // nameInputsHandler() //btn presses triggers the main name input handler ^^ to run and update preffered name span
     });
 })
 
