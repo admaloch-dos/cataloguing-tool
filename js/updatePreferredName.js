@@ -5,7 +5,7 @@
 //it looks for the parent container and any preferred btn within and unclicks previious preferred if any
 
 const resetPreferredBtn = (currBtn) => {
-    console.log('this ran')
+    // console.log('this ran')
     const parentContainer = currBtn.closest('.single-preferred-name')
     if (parentContainer) {
         const preferredButtons = parentContainer.querySelectorAll('.preferred-btn');

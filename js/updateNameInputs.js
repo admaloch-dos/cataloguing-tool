@@ -2,11 +2,17 @@
 //all inputs in name related sections - last, first, middle, additional, titles
 //all handled similarly with exceptions
 //additional names can have multiple preferred
+//name is seprated into two parts, primary and secondary depending on which has primary btn pressed
+//
 const nameInputsHandler = (nameInput) => {
+
     if (nameInput) {
-        revealInputOptions(nameInput) //reveal curr inputs checkbox options on text input
+        hideOrRevealInputs(nameInput) // exported logic to reveal or hide certain inputs in the form on text input
         setCurrInputAsDefault(nameInput); // When you type a new text input - sets it as the preferred input by clicking P btn
-        revealExtraNameOptions(nameInput); // Reveals options based on input
+    }
+
+    let nameObj = {
+
     }
 
     const { preferred: preferredLastName, secondary: secondaryLastNames } = lastNameHandler();
@@ -15,24 +21,63 @@ const nameInputsHandler = (nameInput) => {
     const { preferred: preferredExtraNames, secondary: secondaryExtraNames } = extraNamesHandler();
     const { preferred: preferredTitleName, secondary: secondaryTitleName } = titlesHandler();
 
+    // Adding values to nameObj
+    nameObj.lastName = { preferred: preferredLastName, secondary: secondaryLastNames };
+    nameObj.firstName = { preferred: preferredFirstName, secondary: secondaryFirstName };
+    nameObj.middleName = { preferred: preferredMiddleName, secondary: secondaryMiddleName };
+    nameObj.extraNames = { preferred: preferredExtraNames, secondary: secondaryExtraNames };
+    nameObj.titleName = { preferred: preferredTitleName, secondary: secondaryTitleName };
+
+    console.log(nameObj)
+
     const isSecondarySpanEmpty = !secondaryTitleName && !secondaryLastNames && !secondaryFirstName && !secondaryMiddleName && !secondaryExtraNames
 
-    let formattedPLastName = formatPrimaryLastName(preferredLastName, preferredTitleName, preferredFirstName)
+    let formattedPLastName = formatPrimaryLastName(preferredLastName, preferredTitleName, preferredFirstName, preferredMiddleName)
     let formattedPFirstName = formatPrimaryLastName(preferredFirstName, preferredTitleName, preferredFirstName)
 
-    preferredNameSpan.innerText = `${preferredTitleName}${preferredLastName}${preferredFirstName}${preferredMiddleName}${preferredExtraNames}`;
+
+    preferredNameSpan.innerText = `${preferredTitleName}${formattedPLastName}${preferredFirstName}${preferredMiddleName}${preferredExtraNames}`;
     secondaryNameSpan.innerText = !isSecondarySpanEmpty ? `(${secondaryTitleName}${secondaryLastNames}${secondaryFirstName}${secondaryMiddleName}${secondaryExtraNames})` : ''
 }
 
+const formatPrimaryLastName = (preferredLastName, preferredTitleName, preferredFirstName, preferredMiddleName) => {
+    if (!preferredLastName || preferredTitleName) return ''
+    if (preferredFirstName || preferredMiddleName) {
+        return `${preferredLastName}, `
+    } else {
+        return preferredLastName
+    }
+}
 
+const formatPrimaryFirstName = (preferredFirstName, preferredTitleName, preferredLastName) => {
+    if (!preferredFirstName || preferredTitleName && preferredLastName) return ''
+    if (preferredLastName || preferredTitleName) {
+        return `${preferredFirstName}, `
+    } else {
+        return preferredFirstName
+    }
+}
+
+//logic for handling hidding or revealing fields on text input
+//ex. first name field reveals initial and shortened name option etc..
+const hideOrRevealInputs = (nameInput) => {
+    revealIndividualTextInputs(nameInput, 'firstNameInput', '#first-init-preferred-item, #preferred-shortname-item');
+    hideIndividualTextInputs(nameInput, 'firstNameInput', '#mid-init-preferred-item, #title-input-container');
+    revealIndividualTextInputs(nameInput, 'middle-name', '#mid-init-preferred-item');
+    hideIndividualTextInputs(nameInput, 'title', '#first-name-item', '#first-init-preferred-item');
+}
+
+//func to generate each string
 const lastNameHandler = () => {
     const lastNameSection = document.querySelector('.last-name-section')
     return genNameString(lastNameSection)
 }
+
 const firstNameHandler = () => {
     const firstNameSection = document.querySelector('.first-name-section')
     return genNameString(firstNameSection)
 }
+
 const middleNameHandler = () => {
     const middleNameSection = document.querySelector('.middle-name-section')
     return genNameString(middleNameSection)
@@ -42,10 +87,15 @@ const extraNamesHandler = () => {
     const additionalNamesSection = document.querySelector('.additional-names-section')
     return genNameString(additionalNamesSection)
 }
+
 const titlesHandler = () => {
     const titleNameSection = document.querySelector('.title-section')
     return genNameString(titleNameSection)
 }
+
+
+
+
 
 //helper func for generating string for last/first/middle names preferred and secondary
 const genNameString = (container) => {

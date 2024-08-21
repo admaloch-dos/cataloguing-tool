@@ -48,3 +48,21 @@ const clearIndividualTextInputs = (inputArr) => {
         triggerEvent(inputElement)
     }
 }
+
+//next 2 funcs - take current text input, and a comparison id.. if they are the same it will hide or reveal a list of inputted items
+//only works if bootstrap d-none and d-flex are used to show or hide the item
+const hideIndividualTextInputs = (currInput, comparisonId, items) => {
+    if (currInput.id === comparisonId) {
+        currInput.value.length > 0
+            ? $(items).removeClass('d-flex').addClass('d-none')
+            : $(items).removeClass('d-none').addClass('d-flex')
+    }
+}
+
+const revealIndividualTextInputs = (currInput, comparisonId, items) => {
+    if (currInput.id === comparisonId) {
+        currInput.value.length > 0
+            ? $(items).removeClass('d-none').addClass('d-flex')
+            : $(items).removeClass('d-flex').addClass('d-none')
+    }
+}

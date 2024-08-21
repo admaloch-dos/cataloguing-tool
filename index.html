@@ -114,7 +114,7 @@
                     class="first-name-section main-section infant-hide name-section single-preferred-name first-or-middle-section">
                     <h3>First Name</h3>
                     <!-- First Name Input -->
-                    <div class="input-item input-group d-flex align-items-center">
+                    <div id="first-name-item" class="input-item input-group d-flex align-items-center">
                         <label class="me-1" for="firstNameInput">First Name:</label>
                         <input class="me-2 form-item-input name-input" type="text" class="form-control"
                             id="firstNameInput">
@@ -323,7 +323,8 @@
                     </div>
                 </div>
 
-                <div id="additional-names-section" class="additional-names-section main-section infant-hide name-section">
+                <div id="additional-names-section"
+                    class="additional-names-section main-section infant-hide name-section">
                     <h3>Additional Names</h3>
 
                     <!-- Maiden Name -->
@@ -405,7 +406,9 @@
                     </div>
                 </div>
 
-                <div id="title-section" class="title-section main-section infant-hide name-section single-preferred-name">
+
+                <div id="title-section"
+                    class="title-section main-section infant-hide name-section single-preferred-name">
                     <h3>Titles</h3>
 
                     <!-- Title -->
@@ -418,8 +421,9 @@
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
                             </label>
-                            <input type="checkbox" class="btn-check preferred-btn" id="btn-check-12" autocomplete="off">
-                            <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check-12"><i
+                            <input type="checkbox" class="btn-check preferred-btn" id="title-preferred"
+                                autocomplete="off">
+                            <label class="btn btn-outline-dark btn-sm custom-btn" for="title-preferred"><i
                                     class="fa-solid fa-p fa-style"></i></label>
 
                         </div>
@@ -439,8 +443,9 @@
                                 <span class="custom-label">Hide</span>
                                 <input type="checkbox" class="show-item-checkbox ms-1 hide-item-toggle">
                             </label>
-                            <input type="checkbox" class="btn-check preferred-btn" id="btn-check-13" autocomplete="off">
-                            <label class="btn btn-outline-dark btn-sm custom-btn" for="btn-check-13"><i
+                            <input type="checkbox" class="btn-check preferred-btn" id="indiginous-preferred"
+                                autocomplete="off">
+                            <label class="btn btn-outline-dark btn-sm custom-btn" for="indiginous-preferred"><i
                                     class="fa-solid fa-p fa-style"></i></label>
 
                         </div>
@@ -573,7 +578,6 @@
         <script src="js/updateEnslaved.js"></script>
         <script src="js/revealInputOptions.js"></script>
         <script src="js/updatePreferredName.js"></script>
-        <script src="js/hideAndRevealItems.js"></script>
         <script src="js/updateInfantOnClick.js"></script>
         <script src="js/updateSuffixSelect.js"></script>
         <script src="js/formatNameStringSpans.js"></script>

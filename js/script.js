@@ -62,7 +62,7 @@ document.querySelector('#suffixSelect').addEventListener('change', suffixSelectH
 
 
 //main listener for all .preferred-btn checkbox btn inputs - these are for any name related input
-//all logic/helper funcs related to this exported to handlePreferredBtns.js
+//all logic/helper funcs related to this exported to updatePreferredName.js
 document.querySelectorAll('.preferred-btn').forEach(btn => {
     btn.addEventListener('change', function () {
         resetPreferredBtn(this)
