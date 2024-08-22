@@ -1,0 +1,28 @@
+const personDataObj = {
+    isUnknown: false,
+    unKnownInfo: '',
+    isInfant: false,
+    lastBirthName: { value: '', isPreferred: true, isSecondary: false, isHidden: false },
+    lastPenName: { value: '', isPreferred: false, isSecondary: true, isHidden: false },
+    lastAnglicizedName: { value: '', isPreferred: false, isSecondary: true, isHidden: false },
+    firstBirthName: { value: '', isPreferred: true, isSecondary: false, isHidden: false },
+    shortenedName: { value: '', isPreferred: true, isSecondary: false, isHidden: false },
+    firstInitial: { value: '', isPreferred: true, isSecondary: false, isHidden: false },
+    firstPenName: { value: '', isPreferred: false, isSecondary: true, isHidden: false },
+    firstAnglicizedName: { value: '', isPreferred: false, isSecondary: true, isHidden: false },
+    nickName: { value: '', isPreferred: false, isSecondary: true, isHidden: false },
+    middleBirthName: { value: '', isPreferred: true, isSecondary: false, isHidden: false },
+    middleInitial: { value: '', isPreferred: true, isSecondary: false, isHidden: false },
+    middleAnglicizedName: { value: '', isPreferred: false, isSecondary: true, isHidden: false },
+    maidenName: { value: '', isPreferred: true, isSecondary: false, isHidden: false },
+    additionalLastNames: { value: '', isPreferred: false, isSecondary: true, isHidden: false },
+    nameSuffix: { value: '', isPreferred: false, isSecondary: true, isHidden: false },
+    titleName: { value: '', isPreferred: true, isSecondary: false, isHidden: false },
+    indigenousName: { value: '', isPreferred: false, isSecondary: true, isHidden: false },
+    birthDate: { value: '', isCirca: false, beforeOrAfter: '' },
+    deathDate: { value: '', isCirca: false, beforeOrAfter: '' },
+    flourished: { value: '', isCirca: false, beforeOrAfter: '' },
+    isEnslaved: false,
+    enslavedBy: ''
+
+}
