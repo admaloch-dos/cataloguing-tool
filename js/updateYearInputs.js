@@ -7,7 +7,7 @@ const yearInputsHandler = (yearInput) => {
     const deathDateStr = genYearString('#death-date-item')
     const flourishedStr = genYearString('#flourished-item')
 
-    const formattedFlStr = flourishedStr ? `fl. ${flourishedStr}` : ''
+    const formattedFlStr = flourishedStr ? `fl.${flourishedStr}` : ''
     const formattedDeathStr = deathDateStr ? `-${deathDateStr}` : ''
 
     yearsSpan.innerText = `${birthDateStr}${formattedDeathStr}${formattedFlStr}`;
@@ -51,7 +51,6 @@ const handleEmptyYearInputs = (yearInputElement) => {
     } else if (yearInputElement.id === 'flourished') {
 
         if (yearInputElement.value.trim()) {
-            console.log('has text')
             resetTextInput('#birthDate')
             resetTextInput('#deathDate')
             $('#birth-date-item, #death-date-item').removeClass('d-flex').addClass('d-none')

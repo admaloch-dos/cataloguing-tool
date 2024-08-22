@@ -3,7 +3,6 @@
 //all handled similarly with exceptions
 //additional names can have multiple preferred
 //name is seprated into two parts, primary and secondary depending on which has primary btn pressed
-//
 const nameInputsHandler = (nameInput) => {
 
     if (nameInput) {
@@ -21,50 +20,57 @@ const nameInputsHandler = (nameInput) => {
     const isSecondarySpanEmpty = !secondaryTitleName && !secondaryLastNames && !secondaryFirstName && !secondaryMiddleName && !secondaryExtraNames
 
     let nameObj = {
-        lastName: { preferred: preferredLastName, secondary: secondaryLastNames },
-        firstName: { preferred: preferredFirstName, secondary: secondaryFirstName },
-        middleName: { preferred: preferredMiddleName, secondary: secondaryMiddleName },
-        extraNames: { preferred: preferredExtraNames, secondary: secondaryExtraNames },
-        titleName: { preferred: preferredTitleName, secondary: secondaryTitleName }
+        last: { preferred: preferredLastName, secondary: secondaryLastNames },
+        first: { preferred: preferredFirstName, secondary: secondaryFirstName },
+        middle: { preferred: preferredMiddleName, secondary: secondaryMiddleName },
+        extras: { preferred: preferredExtraNames, secondary: secondaryExtraNames },
+        title: { preferred: preferredTitleName, secondary: secondaryTitleName }
     }
+    const { last, first, middle, title, extras } = nameObj
 
+    const lastNameNeedsComma = title.preferred || first.preferred || middle.preferred || extras.preferred
 
-    nameObj.lastName.preferred = formatPrimaryLastName(nameObj)
+    // nameObj.last.preferred = formatLastName(nameObj, 'preferred')
+    nameObj.last.preferred = lastNameNeedsComma ? `${last.preferred}, ` : last.preferred
+    nameObj.middle.preferred = formatMiddleName(nameObj, 'preferred')
+    // nameObj.last.secondary = formatLastName(nameObj, 'secondary')
     // let formattedPFirstName = formatPrimaryLastName(preferredFirstName, preferredTitleName, preferredFirstName)
 
-    const { lastName, firstName, middleName, titleName } = nameObj
 
-    preferredNameSpan.innerText = `${preferredTitleName}${lastName.preferred}${preferredFirstName}${preferredMiddleName}${preferredExtraNames}`;
-    secondaryNameSpan.innerText = !isSecondarySpanEmpty ? ` (${secondaryTitleName}${secondaryLastNames}${secondaryFirstName}${secondaryMiddleName}${secondaryExtraNames})` : ''
+
+    const preferredNameRes = `${title.preferred}${last.preferred}${first.preferred}${middle.preferred}${extras.preferred}`;
+    const secondaryNameRes = !isSecondarySpanEmpty ? `\u00A0(${title.secondary}${last.secondary}${first.secondary}${middle.secondary}${extras.secondary})` : ''
+
+    preferredNameSpan.innerText = preferredNameRes
+    secondaryNameSpan.innerText = secondaryNameRes
 }
 
-const formatPrimaryLastName = (nameObj) => {
-    const { lastName, firstName, middleName, titleName } = nameObj
-
-   firstName.preferred && console.log(firstName.preferred)
-
-    if (!lastName.preferred || titleName.preferred) return ''
-
-    if (firstName.preferred || middleName.preferred) {
-        return `${lastName.preferred}, `
+//pass in preferred or secondary to determine what string to format
+const formatLastName = (nameObj, preferredOrSecondary) => {
+    const { last, first, middle, title, extras } = nameObj
+    if (!last[preferredOrSecondary]) return ''
+    if (first[preferredOrSecondary] || middle[preferredOrSecondary] || extras[preferredOrSecondary] || title[preferredOrSecondary]) {
+        return `${last[preferredOrSecondary]}, `
     } else {
-        return lastName.preferred
+        return last[preferredOrSecondary]
     }
 }
 
-// const formatPrimaryFirstName = (nameObj) => {
-//     const { lastName, firstName, middleName, titleName } = nameObj
+const formatMiddleName = (nameObj, preferredOrSecondary) => {
+    const { last, first, middle, title } = nameObj
+    if (!middle[preferredOrSecondary]) return ''
 
-//    firstName.preferred && console.log(firstName.preferred)
+    if (last[preferredOrSecondary] || first[preferredOrSecondary]) {
+        return ` ${middle[preferredOrSecondary]}`
+    } else {
+        return middle[preferredOrSecondary]
+    }
+}
 
-//     if (!firstName.preferred) return ''
 
-//     if (firstName.preferred || middleName.preferred) {
-//         return `${lastName.preferred}, `
-//     } else {
-//         return lastName.preferred
-//     }
-// }
+
+
+
 
 
 
@@ -117,9 +123,9 @@ const genNameString = (container) => {
         const formattedInputVal = textInput.value.length > 0 && formatNameString(textInput)
         if (formattedInputVal && formattedInputVal.length > 0) {
             if (btn.checked) {
-                preferred += !preferred ? formattedInputVal : ` ${formattedInputVal}`
+                preferred += !preferred ? formattedInputVal : `${formattedInputVal}`
             } else {
-                secondary += !secondary ? formattedInputVal : ` ${formattedInputVal}`
+                secondary += !secondary ? formattedInputVal : `${formattedInputVal}`
             }
         }
     })
@@ -172,6 +178,6 @@ const resetPreferredInput = (input) => {
         const prefferedBtn = filledInput.nextElementSibling.querySelector('.preferred-btn')
         prefferedBtn.click()
     }
-    // updateNameInputHandler()
+    // nameInputsHandler()
 }
 
