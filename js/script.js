@@ -14,6 +14,7 @@ let enslavedSpan = document.querySelector('.enslaved-span')
 //all logic/helper funcs related to this exported to updateNameInputs.js
 document.querySelectorAll('.name-input').forEach(nameInput =>
     nameInput.addEventListener('input', () => {
+        console.log(this)
         nameInputsHandler(nameInput)
     })
 );
@@ -38,16 +39,14 @@ document.querySelectorAll('.enslaved-input').forEach(input => {
 //all logic/helper funcs related to this exported to updateUnknownName.js
 document.querySelector('.unknown-item-toggle').addEventListener('change', unknownNameBoxHandler)
 
-
-//main listener for the infant checkbox
-//all logic/helper funcs related to this exported to updateInitialPreferred.js
-document.querySelector('#btn-check-infant').addEventListener('input', infantCheckHandler)
-
-
 //unknown person type select that shows up if above is run ^
 document.querySelector('#unknownNameSelect').addEventListener('change', () => {
     unknownNameSpan.innerText = `[${unknownNameSelect.value}]`
 })
+
+//main listener for the infant checkbox
+//all logic/helper funcs related to this exported to updateInitialPreferred.js
+document.querySelector('#btn-check-infant').addEventListener('input', infantCheckHandler)
 
 
 //main listener for initial preffered checkboxes for first and middle name sections

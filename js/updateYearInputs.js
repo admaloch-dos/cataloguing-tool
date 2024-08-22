@@ -8,9 +8,12 @@ const yearInputsHandler = (yearInput) => {
     const flourishedStr = genYearString('#flourished-item')
 
     const formattedFlStr = flourishedStr ? `fl.${flourishedStr}` : ''
-    const formattedDeathStr = deathDateStr ? `-${deathDateStr}` : ''
+    const formattedBirthStr = birthDateStr ? `${birthDateStr}-` : ''
+    const formattedDeathStr = !birthDateStr ? `-${deathDateStr}` : deathDateStr
 
-    yearsSpan.innerText = `${birthDateStr}${formattedDeathStr}${formattedFlStr}`;
+    const isDates = birthDateStr || deathDateStr || flourishedStr ? ', ' : ''
+
+    yearsSpan.innerText = isDates ? `, ${formattedBirthStr}${formattedDeathStr}${formattedFlStr}` : ''
 }
 
 //utility func for generating string for last/first/middle names preferred and secondary

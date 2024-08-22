@@ -26,20 +26,22 @@ const nameInputsHandler = (nameInput) => {
         extras: { preferred: preferredExtraNames, secondary: secondaryExtraNames },
         title: { preferred: preferredTitleName, secondary: secondaryTitleName }
     }
+
+
+
     const { last, first, middle, title, extras } = nameObj
 
-    const lastNameNeedsComma = title.preferred || first.preferred || middle.preferred || extras.preferred
 
-    // nameObj.last.preferred = formatLastName(nameObj, 'preferred')
-    nameObj.last.preferred = lastNameNeedsComma ? `${last.preferred}, ` : last.preferred
+    nameObj.last.preferred = formatLastName(nameObj, 'preferred')
+    nameObj.last.secondary = formatLastName(nameObj, 'secondary')
     nameObj.middle.preferred = formatMiddleName(nameObj, 'preferred')
-    // nameObj.last.secondary = formatLastName(nameObj, 'secondary')
-    // let formattedPFirstName = formatPrimaryLastName(preferredFirstName, preferredTitleName, preferredFirstName)
+    nameObj.middle.secondary = formatMiddleName(nameObj, 'secondary')
+    nameObj.extras.preferred = formatExtraNames(nameObj, 'preferred')
+    nameObj.extras.secondary = formatExtraNames(nameObj, 'secondary')
 
 
-
-    const preferredNameRes = `${title.preferred}${last.preferred}${first.preferred}${middle.preferred}${extras.preferred}`;
-    const secondaryNameRes = !isSecondarySpanEmpty ? `\u00A0(${title.secondary}${last.secondary}${first.secondary}${middle.secondary}${extras.secondary})` : ''
+    const preferredNameRes = `${last.preferred}${title.preferred}${first.preferred}${middle.preferred}${extras.preferred}`;
+    const secondaryNameRes = !isSecondarySpanEmpty ? `\u00A0(${last.secondary}${title.secondary}${first.secondary}${middle.secondary}${extras.secondary})` : ''
 
     preferredNameSpan.innerText = preferredNameRes
     secondaryNameSpan.innerText = secondaryNameRes
@@ -57,13 +59,24 @@ const formatLastName = (nameObj, preferredOrSecondary) => {
 }
 
 const formatMiddleName = (nameObj, preferredOrSecondary) => {
-    const { last, first, middle, title } = nameObj
+    const { last, first, middle, title, extras } = nameObj
     if (!middle[preferredOrSecondary]) return ''
 
-    if (last[preferredOrSecondary] || first[preferredOrSecondary]) {
+    if (last[preferredOrSecondary] || first[preferredOrSecondary] || extras[preferredOrSecondary] || title[preferredOrSecondary]) {
         return ` ${middle[preferredOrSecondary]}`
     } else {
         return middle[preferredOrSecondary]
+    }
+}
+
+const formatExtraNames = (nameObj, preferredOrSecondary) => {
+    const { last, first, middle, title, extras } = nameObj
+    if (!extras[preferredOrSecondary]) return ''
+
+    if (last[preferredOrSecondary] || first[preferredOrSecondary] || middle[preferredOrSecondary] || title[preferredOrSecondary]) {
+        return ` ${extras[preferredOrSecondary]}`
+    } else {
+        return extras[preferredOrSecondary]
     }
 }
 
@@ -119,6 +132,7 @@ const genNameString = (container) => {
     let secondary = '';
     container.querySelectorAll('.preferred-btn').forEach(btn => {
         const textInput = btn.closest('.input-item').querySelector('.form-item-input')
+        // console.log(this)
         if (!textInput) return
         const formattedInputVal = textInput.value.length > 0 && formatNameString(textInput)
         if (formattedInputVal && formattedInputVal.length > 0) {
@@ -129,6 +143,8 @@ const genNameString = (container) => {
             }
         }
     })
+    preferred = preferred.trim()
+    secondary = secondary.trim()
     return { preferred, secondary }
 }
 
@@ -136,10 +152,16 @@ const genNameString = (container) => {
 const formatNameString = (input) => {
     const inputVal = input.value
     const upperCaseVal = inputVal.slice(0, 1).toUpperCase() + inputVal.slice(1)
+    // console.log(input.id)
     if (input.id === 'nickname') {
+        // console.log('nickname input')
         return `'${upperCaseVal}'`
-    } else if (input.id === 'middle-name' || input.id === 'additionalLastNames' || input.id === 'indigenousName' || input.id === 'title') {
+    } else if (input.id === 'middle-name' || input.id === 'indigenousName' || input.id === 'title') {
         return capFirstLettersInStr(inputVal)
+
+    } else if (input.id === 'additionalLastNames') {
+        // console.log('additional names input typed')
+        return ` ${capFirstLettersInStr(inputVal)}`
     } else {
         return upperCaseVal
     }
