@@ -13,8 +13,7 @@ let enslavedSpan = document.querySelector('.enslaved-span')
 //main listener for any name inputs, last, first, middle, additional, titles
 //all logic/helper funcs related to this exported to updateNameInputs.js
 document.querySelectorAll('.name-input').forEach(nameInput =>
-    nameInput.addEventListener('input', () => {
-        console.log(this)
+    nameInput.addEventListener('input', (e) => {
         nameInputsHandler(nameInput)
     })
 );

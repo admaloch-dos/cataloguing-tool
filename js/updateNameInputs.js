@@ -4,7 +4,8 @@
 //additional names can have multiple preferred
 //name is seprated into two parts, primary and secondary depending on which has primary btn pressed
 const nameInputsHandler = (nameInput) => {
-
+    // if (!nameInput) return
+    // console.log(nameInput)
     if (nameInput) {
         revealItemCheckBoxes(nameInput) //show preferred/hide btn options when input has length
         hideOrRevealInputs(nameInput) // exported logic to reveal or hide certain items based on text input
