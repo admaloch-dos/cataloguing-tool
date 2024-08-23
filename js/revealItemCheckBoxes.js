@@ -3,6 +3,7 @@ const revealItemCheckBoxes = (input) => {
     if (!input) return
     const checkBoxesContainer = input.nextElementSibling
     if (checkBoxesContainer) {
+        // console.log(checkBoxesContainer)
         if (input.value) {
             checkBoxesContainer.classList.remove('d-none')
             checkBoxesContainer.classList.add('d-flex')

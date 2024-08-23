@@ -39,17 +39,7 @@ h3 {
     display: none;
 } */
 
-.last-name-section,
-.first-name-section,
-.middle-name-section,
-.additional-names-section,
-.title-section,
-.years-section,
-.enslaved-section,
-.title-section {
-    display: flex;
-    flex-direction: column;
-}
+
 
 /* .check-boxes {
     display: none;

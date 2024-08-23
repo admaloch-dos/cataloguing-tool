@@ -181,10 +181,10 @@ const setCurrItemAsPreferred = (input) => {
             if (prefferedBtn && !prefferedBtn.checked) prefferedBtn.click()
         } else {
             if (prefferedBtn && prefferedBtn.checked) prefferedBtn.click()
-            if (input.id === 'middle-name') {
+            if (input.id === 'middleBirthName') {
                 document.querySelector('#middleInitialInput').value = ''
-            } else if (input.id === 'firstNameInput') {
-                document.querySelector('#firstInitialInput').value = ''
+            } else if (input.id === 'firstBirthName') {
+                document.querySelector('#firstInitial').value = ''
             }
             resetPreferredInput(input) //set the first input that has text in it in the current section as preferred- if any
         }

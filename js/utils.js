@@ -24,6 +24,12 @@ const capFirstLettersInStr = (inputStr) => {
         .join(' ');
 }
 
+
+const capFirstLetterInStr = (str) => {
+    return str.slice(0, 1).toUpperCase() + str.slice(1)
+}
+
+
 //input a section tag and any input in that section will be emptied
 //helper to handle emptieing name related inputs if filled in
 // last, first, middle, additional names, titles etc..
@@ -51,18 +57,14 @@ const clearIndividualTextInputs = (inputArr) => {
 
 //next 2 funcs - take current text input, and a comparison id.. if they are the same it will hide or reveal a list of inputted items
 //only works if bootstrap d-none and d-flex are used to show or hide the item
-const hideIndividualTextInputs = (currInput, comparisonId, items) => {
-    if (currInput.id === comparisonId) {
-        currInput.value.length > 0
-            ? $(items).removeClass('d-flex').addClass('d-none')
-            : $(items).removeClass('d-none').addClass('d-flex')
-    }
+const hideIndividualTextInputs = (isInput, items) => {
+    isInput
+    ? $(items).removeClass('d-flex').addClass('d-none')
+    : $(items).removeClass('d-none').addClass('d-flex')
 }
 
-const revealIndividualTextInputs = (currInput, comparisonId, items) => {
-    if (currInput.id === comparisonId) {
-        currInput.value.length > 0
-            ? $(items).removeClass('d-none').addClass('d-flex')
-            : $(items).removeClass('d-flex').addClass('d-none')
-    }
+const revealIndividualTextInputs = (isInput, items) => {
+    isInput
+        ? $(items).removeClass('d-none').addClass('d-flex')
+        : $(items).removeClass('d-flex').addClass('d-none')
 }
