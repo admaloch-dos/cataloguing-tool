@@ -7,6 +7,9 @@ const infantCheckHandler = (isChecked) => {
         clearSectionTextInputs('.infant-hide')
         clearIndividualTextInputs(['#lastPenName', '#lastAnglicizedName'])
         $(itemsToShowOrHide).removeClass('d-flex').addClass('d-none')
+        const suffixSelect = document.querySelector('#nameSuffix')
+        suffixSelect.selectedIndex = 0;
+        triggerEvent(suffixSelect)
     } else {
         $(itemsToShowOrHide).removeClass('d-none').addClass('d-flex')
     }

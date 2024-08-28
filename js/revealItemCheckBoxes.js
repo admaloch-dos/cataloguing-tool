@@ -4,12 +4,16 @@ const revealItemCheckBoxes = (input) => {
     const checkBoxesContainer = input.nextElementSibling
     if (checkBoxesContainer) {
         // console.log(checkBoxesContainer)
-        if (input.value) {
-            checkBoxesContainer.classList.remove('d-none')
-            checkBoxesContainer.classList.add('d-flex')
-        } else {
-            checkBoxesContainer.classList.remove('d-flex')
-            checkBoxesContainer.classList.add('d-none')
+        // console.log(input.id)
+        if (input.id !== 'firstInitial' || input.id !== 'middleInitial') {
+            if (input.value) {
+                checkBoxesContainer.classList.remove('d-none')
+                checkBoxesContainer.classList.add('d-flex')
+            } else {
+                checkBoxesContainer.classList.remove('d-flex')
+                checkBoxesContainer.classList.add('d-none')
+            }
         }
+
     }
 }

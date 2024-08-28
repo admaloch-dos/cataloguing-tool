@@ -3,12 +3,8 @@ const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
 // form data entry
-let unknownNameSpan = document.querySelector('.unknown-name-span')
-let preferredNameSpan = document.querySelector('.preferred-name-span')
-let infantSpan = document.querySelector('.infant-span')
-let secondaryNameSpan = document.querySelector('.secondary-name-span')
-let yearsSpan = document.querySelector('.years-span')
-let enslavedSpan = document.querySelector('.enslaved-span')
+let previewText = document.querySelector('#previewText')
+
 
 // const allForms = document.querySelectorAll()
 
@@ -17,28 +13,22 @@ let enslavedSpan = document.querySelector('.enslaved-span')
 document.querySelectorAll('.form-input').forEach(input =>
     input.addEventListener('input', (e) => {
 
-        revealItemCheckBoxes(input)
         const id = input.id
-
         const currObjItem = personDataObj[input.id]
-
         if (input.type === 'text') {
-
+            revealItemCheckBoxes(input) //also run on the namesuffix select input
             if (id === 'firstBirthName') {
                 hideIndividualTextInputs(input.value.length, '#title-input-container');
                 revealIndividualTextInputs(input.value.length, '#first-init-preferred-item, #preferred-shortname-item');
             } else if (id === 'middleBirthName') {
                 revealIndividualTextInputs(input.value.length, '#mid-init-preferred-item');
             }
-
-            currObjItem.value = input.value //set value of obj item to input value
-            //if the item has these options set these too
-            if (currObjItem.isPreferred ) {
+            currObjItem.value = capFirstLettersInStr(input.value)  //set value of obj item to input value
+            if (currObjItem.isPreferred) {
                 currObjItem.isPreferred = input.value ? true : false
-
             }
-            // console.log(currObjItem)
         }
+
         const parentItem = input.closest('.input-item')
         const locatedObjKey = parentItem && parentItem.querySelector('.form-input').id
         const locatedObjItem = personDataObj[locatedObjKey]
@@ -47,23 +37,29 @@ document.querySelectorAll('.form-input').forEach(input =>
 
             if (input.classList.contains('preferred-btn')) {
                 locatedObjItem.isPreferred = input.checked
-
+                // console.log(input.id)
                 resetPreferredBtn(input)
+                if (input.classList.contains('preferred-initial')) {
+                    //for initial btn.. locate normal name input and grab first letter and insert into hidden initial text input then trigger input change
+                    const nameInput = input.closest('.input-item').previousElementSibling.querySelector('.name-input')
+                    const initialTextInput = input.closest('.check-boxes').previousElementSibling
+                    input.checked ? initialTextInput.value = nameInput.value.slice(0, 1) + '.' : ''
+                    triggerEvent(initialTextInput)
+                }
             } else if (input.classList.contains('hide-item-toggle')) {
                 locatedObjItem.isHidden = input.checked
             } else if (id === 'unknownCheckbox') {
                 personDataObj.unknown.isUnknown = input.checked
                 personDataObj.unknown.unknownData = input.checked ? '[Unnamed Person]' : ''
                 unknownNameBoxHandler(input.checked) // hide/show/delete item inputs etc...
+            } else if (id === 'infantCheckbox') {
+                personDataObj.infant.isInfant = input.checked
+                infantCheckHandler(input.checked)
             } else if (id === 'enslavedCheckbox') {
                 personDataObj.enslaved.isEnslaved = input.checked
                 personDataObj.enslaved.value = input.checked ? '(Enslaved Person)' : ''
                 revealIndividualTextInputs(input.checked, '#enslaved-text-item');
-            } else if (id === 'infantCheckbox') {
-                personDataObj.infant.isInfant = input.checked
-                infantCheckHandler(input.checked)
             } else {
-                // console.log(locatedObjKey)
                 locatedObjItem.isCirca = input.checked
             }
         }
@@ -74,18 +70,76 @@ document.querySelectorAll('.form-input').forEach(input =>
             else if (id === 'nameSuffix') {
                 personDataObj[id].value = input.value
                 personDataObj[id].isPreferred = input.value ? true : false
+                revealItemCheckBoxes(input)
             }
             else { //birthdate/death/flourished
                 locatedObjItem.beforeOrAfter = input.value
             }
-
-
         }
         setCurrItemAsPreferred(input)
+        // console.log(personDataObj)
 
 
-        console.log(personDataObj)
+        let unknownStr = '';
+        let preferredNameStr = '';
+        let infantStr = '';
+        let secondaryNameStr = ''
+        let birthStr = '';
+        let deathStr = '';
+        let flourishStr = '';
+        let enslavedStr = '';
 
+
+        for (let input in personDataObj) {
+            const inputItem = personDataObj[input]
+            if (typeof inputItem.isPreferred !== 'undefined') {
+                let itemVal = inputItem.value
+                if (input === 'lastBirthName' ||
+                    input === 'lastPenName' ||
+                    input === 'lastAnglicizedName') {
+                    itemVal = itemVal ? `${itemVal},` : ''
+                }
+                if (inputItem.isPreferred) {
+                    preferredNameStr += `${itemVal} `
+                } else {
+                    secondaryNameStr += `${itemVal} `
+                }
+            }
+            if (input === 'infant') {
+                infantStr = inputItem.isInfant ? '[Infant],' : ''
+            }
+            if (input === 'unknown') {
+                if (inputItem.isUnknown) {
+                    unknownStr = `[${inputItem.unknownData}], `
+                }
+            }
+            if (input === 'birthDate' || input === 'deathDate' || input === 'flourished') {
+                const { value, isCirca, beforeOrAfter } = inputItem
+                const circaStr = isCirca ? '.ca' : ''
+                const resStr = `${beforeOrAfter}${circaStr}${value}`
+                if (input === 'birthDate') birthStr = resStr
+                if (input === 'deathDate') deathStr = resStr
+                if (input === 'flourished') flourishStr = resStr
+            }
+            if (input === 'enslaved') {
+                const { isEnslaved, value } = inputItem
+                if (isEnslaved) {
+                    enslavedStr = value
+                        ? `(Enslaved by ${value})`
+                        : '(Enslaved person)'
+                }
+            }
+        }
+
+        secondaryNameStr = secondaryNameStr ? `(${secondaryNameStr})` : ''
+
+
+        const resStr = `${unknownStr} ${preferredNameStr} ${infantStr} ${secondaryNameStr} ${birthStr} ${deathStr} ${flourishStr} ${enslavedStr}`
+
+        previewText.innerText = resStr
+
+        // const preferredNameStr = `${last.preferred}${title.preferred}${first.preferred}${middle.preferred}${extras.preferred}`
+        // const secondaryNameStr =  `${last.secondary}${title.secondary}${first.secondary}${middle.secondary}${extras.secondary}`
     })
 );
 
@@ -119,20 +173,19 @@ const setCurrItemAsPreferred = (input) => {
             if (!prefferedBtn.checked) {
                 prefferedBtn.click()
                 if (singlePreferredContainer) {
-
                 }
             }
         } else {
             if (prefferedBtn.checked) prefferedBtn.click()
             if (input.id === 'middleBirthName') {
-                document.querySelector('#middleInitialInput').value = ''
+                const middleInitInput = document.querySelector('#middleInitialInput')
+                if (middleInitInput) middleInitInput.value = ''
             } else if (input.id === 'firstBirthName') {
-                document.querySelector('#firstInitial').value = ''
+                const firstInitInput = document.querySelector('#firstInitial')
+                if (firstInitInput) firstInitInput.value = ''
             }
             resetPreferredInput(input) //set the first input that has text in it in the current section as preferred- if any
         }
-
-
     }
 }
 
@@ -143,7 +196,7 @@ const resetPreferredInput = (input) => {
     const formInputs = Array.from(parentContainer.querySelectorAll('.form-item-input'))
     const filledInput = formInputs.find(input => input.value.length > 0)
     if (filledInput) {
-        console.log(filledInput)
+        // console.log(filledInput)
         const prefferedBtn = filledInput.nextElementSibling.querySelector('.preferred-btn')
         prefferedBtn.click()
     }

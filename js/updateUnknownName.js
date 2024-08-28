@@ -4,9 +4,12 @@
 const unknownNameBoxHandler = (isChecked) => {
     const itemsToShowOrHide = "#infant-section, #title-section, #last-name-section, #first-name-section, #middle-name-section, #additional-names-section"
     if (isChecked) {
-        $('#unknownData').addClass('d-flex').removeClass('d-none')
-        $(itemsToShowOrHide).addClass('d-none').removeClass('d-flex')
         clearSectionTextInputs('.name-section')
+        $(itemsToShowOrHide).addClass('d-none').removeClass('d-flex')
+        $('#unknownData').addClass('d-flex').removeClass('d-none')
+        const suffixSelect = document.querySelector('#nameSuffix')
+        suffixSelect.selectedIndex = 0;
+        triggerEvent(suffixSelect)
     } else {
         $('#unknownData').addClass('d-none').removeClass('d-flex')
         $(itemsToShowOrHide).addClass('d-flex').removeClass('d-none')

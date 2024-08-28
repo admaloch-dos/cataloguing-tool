@@ -1,10 +1,9 @@
 const personDataObj = {
     unknown: {isUnknown: false, unknownData: ''},
-    enslaved: {isEnslaved: false, value: ''},
-    infant: {isInfant: false},
     lastBirthName: { value: '', isPreferred: false, isHidden: false },
     lastPenName: { value: '', isPreferred: false, isHidden: false },
     lastAnglicizedName: { value: '', isPreferred: false, isHidden: false },
+    infant: {isInfant: false},
     firstBirthName: { value: '', isPreferred: false, isHidden: false },
     shortenedName: { value: '', isPreferred: false, isHidden: false },
     firstInitial: { value: '', isPreferred: false, isHidden: false },
@@ -21,5 +20,6 @@ const personDataObj = {
     indigenousName: { value: '', isPreferred: false, isHidden: false },
     birthDate: { value: '', isCirca: false, beforeOrAfter: '' },
     deathDate: { value: '', isCirca: false, beforeOrAfter: '' },
-    flourished: { value: '', isCirca: false, beforeOrAfter: '' }
+    flourished: { value: '', isCirca: false, beforeOrAfter: '' },
+    enslaved: {isEnslaved: false, value: ''},
 }
