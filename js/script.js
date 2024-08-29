@@ -13,31 +13,47 @@ let previewText = document.querySelector('#previewText')
 document.querySelectorAll('.form-input').forEach(input =>
     input.addEventListener('input', (e) => {
 
+        let updatedObj = {...personDataObj}
+
         const id = input.id
-        const currObjItem = personDataObj[input.id]
+
         if (input.type === 'text') {
+            const currObjItem = updatedObj[id]
+            let inputValue = capFirstLettersInStr(input.value)
+            let formattedStr = inputValue
             revealItemCheckBoxes(input) //also run on the namesuffix select input
             if (id === 'firstBirthName') {
-                hideIndividualTextInputs(input.value.length, '#title-input-container');
-                revealIndividualTextInputs(input.value.length, '#first-init-preferred-item, #preferred-shortname-item');
+                hideIndividualTextInputs(inputValue.length, '#title-input-container');
+                revealIndividualTextInputs(inputValue.length, '#first-init-preferred-item, #preferred-shortname-item');
             } else if (id === 'middleBirthName') {
-                revealIndividualTextInputs(input.value.length, '#mid-init-preferred-item');
+                revealIndividualTextInputs(inputValue.length, '#mid-init-preferred-item');
+            } else if (id === 'lastBirthName' ||
+                id === 'lastPenName' ||
+                id === 'lastAnglicizedName') {
+
+                formattedStr = inputValue.length ? `${inputValue},` : ''
+            } else if (id === 'nickname') {
+                formattedStr = inputValue.length ? `'${inputValue}'` : ''
+            } else if (id === 'birthDate' || id === 'deathDate' || id === 'flourished') {
+                formattedStr = formatYearItemStr(input, currObjItem)
             }
-            currObjItem.value = capFirstLettersInStr(input.value)  //set value of obj item to input value
             if (currObjItem.isPreferred) {
-                currObjItem.isPreferred = input.value ? true : false
+                currObjItem.isPreferred = inputValue ? true : false
             }
+            //set value of obj item and formatted string
+            currObjItem.value = inputValue.trim()
+            currObjItem.resultStr = formattedStr ? formattedStr.trim() : inputValue.trim()
         }
 
-        const parentItem = input.closest('.input-item')
-        const locatedObjKey = parentItem && parentItem.querySelector('.form-input').id
-        const locatedObjItem = personDataObj[locatedObjKey]
+        const parentSection = input.closest('.input-item')
+        const locatedObjKey = parentSection && parentSection.querySelector('.form-input').id
+        const locatedObjItem = updatedObj[locatedObjKey]
 
         if (input.type === 'checkbox') {
 
             if (input.classList.contains('preferred-btn')) {
                 locatedObjItem.isPreferred = input.checked
-                // console.log(input.id)
+
                 resetPreferredBtn(input)
                 if (input.classList.contains('preferred-initial')) {
                     //for initial btn.. locate normal name input and grab first letter and insert into hidden initial text input then trigger input change
@@ -49,99 +65,113 @@ document.querySelectorAll('.form-input').forEach(input =>
             } else if (input.classList.contains('hide-item-toggle')) {
                 locatedObjItem.isHidden = input.checked
             } else if (id === 'unknownCheckbox') {
-                personDataObj.unknown.isUnknown = input.checked
-                personDataObj.unknown.unknownData = input.checked ? '[Unnamed Person]' : ''
+                updatedObj.unknown.isUnknown = input.checked
+                updatedObj.unknown.unknownData = input.checked ? 'Unnamed Person' : ''
                 unknownNameBoxHandler(input.checked) // hide/show/delete item inputs etc...
             } else if (id === 'infantCheckbox') {
-                personDataObj.infant.isInfant = input.checked
+                updatedObj.infant.isInfant = input.checked
                 infantCheckHandler(input.checked)
             } else if (id === 'enslavedCheckbox') {
-                personDataObj.enslaved.isEnslaved = input.checked
-                personDataObj.enslaved.value = input.checked ? '(Enslaved Person)' : ''
+                updatedObj.enslaved.isEnslaved = input.checked;
                 revealIndividualTextInputs(input.checked, '#enslaved-text-item');
-            } else {
+            } else { //date items circa checkbox -- update value and the item string
                 locatedObjItem.isCirca = input.checked
+                locatedObjItem.resultStr = formatYearItemStr(input, locatedObjItem)
             }
         }
         if (input.type === 'select-one') {
             if (id === 'unknownData') {
-                personDataObj.unknown[id] = input.value
+                updatedObj.unknown[id] = input.value
             }
             else if (id === 'nameSuffix') {
-                personDataObj[id].value = input.value
-                personDataObj[id].isPreferred = input.value ? true : false
+                updatedObj[id].value = input.value
+                updatedObj[id].isPreferred = input.value ? true : false
                 revealItemCheckBoxes(input)
             }
-            else { //birthdate/death/flourished
+            else { //dates - before after select - update select item and results str
                 locatedObjItem.beforeOrAfter = input.value
+                locatedObjItem.resultStr = formatYearItemStr(input, locatedObjItem)
             }
         }
         setCurrItemAsPreferred(input)
-        // console.log(personDataObj)
 
+        personDataObj = updatedObj
 
-        let unknownStr = '';
         let preferredNameStr = '';
-        let infantStr = '';
         let secondaryNameStr = ''
-        let birthStr = '';
-        let deathStr = '';
-        let flourishStr = '';
-        let enslavedStr = '';
-
 
         for (let input in personDataObj) {
             const inputItem = personDataObj[input]
             if (typeof inputItem.isPreferred !== 'undefined') {
-                let itemVal = inputItem.value
-                if (input === 'lastBirthName' ||
-                    input === 'lastPenName' ||
-                    input === 'lastAnglicizedName') {
-                    itemVal = itemVal ? `${itemVal},` : ''
-                }
+                let itemVal = inputItem.resultStr
+
                 if (inputItem.isPreferred) {
                     preferredNameStr += `${itemVal} `
                 } else {
                     secondaryNameStr += `${itemVal} `
                 }
             }
-            if (input === 'infant') {
-                infantStr = inputItem.isInfant ? '[Infant],' : ''
-            }
-            if (input === 'unknown') {
-                if (inputItem.isUnknown) {
-                    unknownStr = `[${inputItem.unknownData}], `
-                }
-            }
-            if (input === 'birthDate' || input === 'deathDate' || input === 'flourished') {
-                const { value, isCirca, beforeOrAfter } = inputItem
-                const circaStr = isCirca ? '.ca' : ''
-                const resStr = `${beforeOrAfter}${circaStr}${value}`
-                if (input === 'birthDate') birthStr = resStr
-                if (input === 'deathDate') deathStr = resStr
-                if (input === 'flourished') flourishStr = resStr
-            }
-            if (input === 'enslaved') {
-                const { isEnslaved, value } = inputItem
-                if (isEnslaved) {
-                    enslavedStr = value
-                        ? `(Enslaved by ${value})`
-                        : '(Enslaved person)'
-                }
-            }
         }
 
-        secondaryNameStr = secondaryNameStr ? `(${secondaryNameStr})` : ''
+        secondaryNameStr = secondaryNameStr.trim() ? `(${secondaryNameStr})` : ''
 
+        const { unknown, birthDate, deathDate, flourished, enslaved, infant } = personDataObj
 
-        const resStr = `${unknownStr} ${preferredNameStr} ${infantStr} ${secondaryNameStr} ${birthStr} ${deathStr} ${flourishStr} ${enslavedStr}`
+        const formattedUnknown = unknown.unknownData ? `[${unknown.unknownData}]` : ''
+
+        const infantStr = infant.isInfant ? '[infant]' : ''
+
+        let enslavedStr = ''
+        if (enslaved.isEnslaved) {
+            enslavedStr = !enslaved.value ? '(Enslaved person)' : `(Enslaved by ${enslaved.value})`
+        }
+
+        const resStr = `${formattedUnknown} ${preferredNameStr} ${infantStr} ${secondaryNameStr} ${birthDate.resultStr} ${deathDate.resultStr} ${flourished.resultStr} ${enslavedStr}`
 
         previewText.innerText = resStr
 
-        // const preferredNameStr = `${last.preferred}${title.preferred}${first.preferred}${middle.preferred}${extras.preferred}`
-        // const secondaryNameStr =  `${last.secondary}${title.secondary}${first.secondary}${middle.secondary}${extras.secondary}`
+        console.log(personDataObj)
     })
 );
+
+//year items have text, checkbox and select input.
+//this formats the resulting string whenever one of these items runs
+const formatYearItemStr = (input, objItem) => {
+    const { value, isCirca, beforeOrAfter } = objItem
+    const parentSectionId = input.closest('.input-item').id
+    //birth string needs -
+    let textStr = value && parentSectionId === 'birth-date-item' ? `${value}-` : value
+    let circaStr = isCirca ? '.ca' : ''
+    let beforeAfterStr = beforeOrAfter
+    if (input.type === 'text') {
+        const formattedInputVal = capFirstLettersInStr(input.value)
+        textStr = input.id === 'birthDate' ? `${formattedInputVal}-` : formattedInputVal
+    } else if (input.type === 'checkbox') {
+        circaStr = input.checked ? '.ca' : ''
+    } else {
+        if (input.value === 'before') {
+            beforeAfterStr = '.b'
+        } else if (input.value === 'after') {
+            beforeAfterStr = '.a'
+        } else beforeAfterStr = ''
+    }
+    return `${circaStr}${beforeAfterStr}${textStr}`
+}
+
+
+// const formatUnknownItemStr = (input, objItem) => {
+//     const { isUnknown, unknownData } = objItem
+
+//     let currCheckVal = ''
+//     let resultStr = unknownData ? ['Enslaved Person']
+
+//     if (input.type === 'checkbox') {
+//         currCheckVal = input.val
+//     } else {
+
+//     }
+//     return `${circaStr}${beforeAfterStr}${textStr}`
+// }
 
 const resetPreferredBtn = (currBtn) => {
     // console.log('this ran')
