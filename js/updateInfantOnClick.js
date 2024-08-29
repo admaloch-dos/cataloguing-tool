@@ -15,16 +15,3 @@ const infantCheckHandler = (isChecked) => {
     }
 }
 
-const updateInputsOnClick = () => {
-    const firstOrMidNameSections = document.querySelectorAll('.first-or-middle-section')
-    firstOrMidNameSections.forEach(section => {
-        const inputItems = section.querySelectorAll('.form-item-input')
-        inputItems.forEach(input => {
-            if (input.type === 'text') {
-                // console.log(input)
-                input.value = ''
-                triggerEvent(input)
-            }
-        })
-    })
-}
