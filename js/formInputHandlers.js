@@ -12,6 +12,9 @@ const handleTextInputs = (input, obj) => {
         if (id === 'firstBirthName') {
             hideIndividualTextInputs(inputValue.length, '#title-input-container');
             revealIndividualTextInputs(inputValue.length, '#first-init-preferred-item, #preferred-shortname-item');
+            if(!input.value.length){
+                clearIndividualTextInputs(['#firstInitial'])
+            }
         } else if (id === 'middleBirthName') {
             revealIndividualTextInputs(inputValue.length, '#mid-init-preferred-item');
         } else if (id === 'lastBirthName' ||
@@ -21,7 +24,29 @@ const handleTextInputs = (input, obj) => {
         } else if (id === 'nickname') {
             formattedStr = inputValue.length ? `'${inputValue}'` : ''
         } else if (id === 'birthDate' || id === 'deathDate' || id === 'flourished') {
-            formattedStr = formatYearItemStr(input, currItem)
+            if (id === 'birthDate' || id === 'deathDate') {
+                const flourishedInput = document.querySelector('#flourished')
+                if (flourishedInput.value.trim()) {
+                    clearIndividualTextInputs(['#flourished'])
+                    removeYearInputs(flourishedInput)
+                }
+            } else if (id === 'flourished') {
+                const birthDateInput = document.querySelector('#birthDate')
+                const deathDateInput = document.querySelector('#deathDate')
+                if (birthDateInput.value.trim()) {
+                    clearIndividualTextInputs(['#birthDate'])
+                    removeYearInputs(birthDateInput)
+                }
+                if (deathDateInput.value.trim()) {
+                    clearIndividualTextInputs(['#deathDate'])
+                    removeYearInputs(deathDateInput)
+                }
+
+            }
+            if (!input.value.length) removeYearInputs(input)
+            else {
+                formattedStr = formatYearItemStr(input, currItem)
+            }
         }
         if (currItem.isPreferred) {
             currItem.isPreferred = inputValue ? true : false
@@ -43,16 +68,21 @@ const handleCheckInputs = (input, obj) => {
         const currItem = updatedObj[locatedObjKey]
         if (input.classList.contains('preferred-btn')) {
             // console.log(updatedObj)
+            const parent = input.closest('.main-section')
+
             currItem.isPreferred = input.checked
+
+
 
             resetPreferredBtn(input)
             if (input.classList.contains('preferred-initial')) {
                 //for initial btn.. locate normal name input and grab first letter and insert into hidden initial text input then trigger input change
                 const nameInput = input.closest('.input-item').previousElementSibling.querySelector('.name-input')
                 const initialTextInput = input.closest('.check-boxes').previousElementSibling
-                input.checked ? initialTextInput.value = nameInput.value.slice(0, 1) + '.' : ''
+                input.checked ? initialTextInput.value = genInitials(nameInput.value) : ''
                 triggerEvent(initialTextInput)
             }
+
         } else if (input.classList.contains('hide-item-toggle')) {
             currItem.isHidden = input.checked
         } else if (input.id === 'unknownCheckbox') {
@@ -87,6 +117,7 @@ const handleSelectInputs = (input, obj) => {
         }
         else if (input.id === 'nameSuffix') {
             updatedObj[input.id].value = input.value
+            updatedObj[input.id].resultStr = input.value
             updatedObj[input.id].isPreferred = input.value ? true : false
             revealItemCheckBoxes(input)
         }
@@ -103,26 +134,41 @@ const handleSelectInputs = (input, obj) => {
 const formatYearItemStr = (input, objItem) => {
     const { value, isCirca, beforeOrAfter } = objItem
     const parentSectionId = input.closest('.input-item').id
-    //birth string needs -
+
     let textStr = value && parentSectionId === 'birth-date-item' ? `${value}-` : value
-    let circaStr = isCirca ? '.ca' : ''
-    let beforeAfterStr = beforeOrAfter
+    let circaStr = isCirca ? '.ca ' : ''
+    let beforeAfterStr = formatBeforeAfterStr(beforeOrAfter)
+
     if (input.type === 'text') {
         const formattedInputVal = capFirstLettersInStr(input.value)
         textStr = input.id === 'birthDate' ? `${formattedInputVal}-` : formattedInputVal
     } else if (input.type === 'checkbox') {
-        circaStr = input.checked ? '.ca' : ''
-
+        circaStr = input.checked ? '.ca ' : ''
     } else {
-        if (input.value === 'before') {
-            beforeAfterStr = '.b'
-        } else if (input.value === 'after') {
-            beforeAfterStr = '.a'
-        } else beforeAfterStr = ''
-
+        beforeAfterStr = formatBeforeAfterStr(input.value)
     }
-    console.log(`${circaStr}${beforeAfterStr}${textStr}`)
     return `${circaStr}${beforeAfterStr}${textStr}`
+}
+
+// take year input item and clear checkbox and select
+const removeYearInputs = (input) => {
+    const checkboxes = input.nextElementSibling
+    const circaBox = checkboxes.querySelector('.circa-checkbox')
+    circaBox.checked = false
+    const beforeAfterSelect = checkboxes.querySelector('.before-after-select')
+    beforeAfterSelect.selectedIndex = 0
+    triggerEvent(circaBox)
+    triggerEvent(beforeAfterSelect)
+}
+
+const formatBeforeAfterStr = (inputText) => {
+    let res = ''
+    if (inputText === 'before') {
+        res = '.b '
+    } else if (inputText === 'after') {
+        res = '.a '
+    } else res = ''
+    return res;
 }
 
 

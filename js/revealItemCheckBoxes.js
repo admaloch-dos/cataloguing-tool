@@ -1,6 +1,6 @@
 //helper func - options for each input are hidden by default- on input change they will be revealed
 const revealItemCheckBoxes = (input) => {
-    if (!input) return
+    if (!input || input.id === 'firstInitial' || input.id === 'middleInitial' ) return
     const checkBoxesContainer = input.nextElementSibling
     if (checkBoxesContainer) {
         // console.log(checkBoxesContainer)

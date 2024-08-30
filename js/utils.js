@@ -24,6 +24,12 @@ const capFirstLettersInStr = (inputStr) => {
         .join(' ');
 }
 
+const genInitials = (inputStr) => {
+    return inputStr.toLowerCase().split(' ')
+        .map(str => str.slice(0, 1).toUpperCase() + '.')
+        .join(' ');
+}
+
 
 const capFirstLetterInStr = (str) => {
     return str.slice(0, 1).toUpperCase() + str.slice(1)
@@ -59,8 +65,8 @@ const clearIndividualTextInputs = (inputArr) => {
 //only works if bootstrap d-none and d-flex are used to show or hide the item
 const hideIndividualTextInputs = (isInput, items) => {
     isInput
-    ? $(items).removeClass('d-flex').addClass('d-none')
-    : $(items).removeClass('d-none').addClass('d-flex')
+        ? $(items).removeClass('d-flex').addClass('d-none')
+        : $(items).removeClass('d-none').addClass('d-flex')
 }
 
 const revealIndividualTextInputs = (isInput, items) => {

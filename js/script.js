@@ -34,7 +34,13 @@ document.querySelectorAll('.form-input').forEach(input =>
             const inputItem = personDataObj[input]
             if (typeof inputItem.isPreferred !== 'undefined') {
                 let itemVal = inputItem.resultStr
-
+                // console.log(inputItem)
+                if (input === 'firstBirthName') {
+                    const middleNamePreffered = personDataObj.middleInitial.isPreferred
+                    if (middleNamePreffered) {
+                        secondaryNameStr += `${itemVal} `
+                    }
+                }
                 if (inputItem.isPreferred) {
                     preferredNameStr += `${itemVal} `
                 } else {
@@ -43,26 +49,37 @@ document.querySelectorAll('.form-input').forEach(input =>
             }
         }
 
-        secondaryNameStr = secondaryNameStr.trim() ? `(${secondaryNameStr})` : ''
+
+
 
         const { unknown, birthDate, deathDate, flourished, enslaved, infant } = personDataObj
 
-        const formattedUnknown = unknown.unknownData ? `[${unknown.unknownData}]` : ''
+        const formattedUnknown = unknown.unknownData ? `[${unknown.unknownData}],` : ''
 
         const infantStr = infant.isInfant ? '[infant]' : ''
 
         let enslavedStr = ''
-        
+
         if (enslaved.isEnslaved) {
             enslavedStr = !enslaved.value ? '(Enslaved person)' : `(Enslaved by ${enslaved.value})`
         }
 
-        const resStr = `${formattedUnknown} ${preferredNameStr} ${infantStr} ${secondaryNameStr} ${birthDate.resultStr} ${deathDate.resultStr} ${flourished.resultStr} ${enslavedStr}`
+        if (secondaryNameStr.trim()) {
+            secondaryNameStr = `(${secondaryNameStr.trim()})`
+            if (birthDate.resultStr ||
+                deathDate.resultStr ||
+                flourished.resultStr ||
+                enslavedStr) {
+                secondaryNameStr = `${secondaryNameStr},`
+            }
+        }
+
+        const resStr = `${formattedUnknown} ${preferredNameStr} ${infantStr} ${secondaryNameStr} ${birthDate.resultStr}${deathDate.resultStr} ${flourished.resultStr} ${enslavedStr}`
 
         //preview item
         document.querySelector('#previewText').innerText = resStr
 
-        // console.log(personDataObj)
+        console.log(personDataObj)
     })
 );
 
