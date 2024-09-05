@@ -10,9 +10,13 @@ const handleTextInputs = (input, obj) => {
         let formattedStr = inputValue
         revealItemCheckBoxes(input) //also run on the namesuffix select input
         if (id === 'firstBirthName') {
-            hideIndividualTextInputs(inputValue.length, '#title-input-container');
-            revealIndividualTextInputs(inputValue.length, '#first-init-preferred-item, #preferred-shortname-item');
-            if(!input.value.length){
+            if (input.value.length) {
+                $('#title-input-container').removeClass('d-flex').addClass('d-none')
+                $('#first-init-preferred-item, #preferred-shortname-item').removeClass('d-none').addClass('d-flex')
+                clearIndividualTextInputs(['#titleName'])
+            } else {
+                $('#title-input-container').removeClass('d-none').addClass('d-flex')
+                $('#first-init-preferred-item, #preferred-shortname-item').removeClass('d-flex').addClass('d-none')
                 clearIndividualTextInputs(['#firstInitial'])
             }
         } else if (id === 'middleBirthName') {
@@ -47,7 +51,10 @@ const handleTextInputs = (input, obj) => {
             else {
                 formattedStr = formatYearItemStr(input, currItem)
             }
+        } else if (id === 'titleName' || id === 'indigenousName') {
+            
         }
+
         if (currItem.isPreferred) {
             currItem.isPreferred = inputValue ? true : false
         }

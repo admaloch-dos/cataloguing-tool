@@ -1,5 +1,6 @@
 const handleCheckInputs = (input, obj) => {
     let updatedObj = { ...obj }
+
     if (input.type === 'checkbox') {
         const parentSection = input.closest('.input-item')
         const locatedObjKey = parentSection && parentSection.querySelector('.form-input').id
@@ -28,10 +29,24 @@ const handleCheckInputs = (input, obj) => {
         } else if (input.id === 'enslavedCheckbox') {
             updatedObj.enslaved.isEnslaved = input.checked;
             revealIndividualTextInputs(input.checked, '#enslaved-text-item');
+        } else if (input.classList.contains('delete-initial')) {
+            const emptyItem = { value: '', isPreferred: false, isHidden: false, resultStr: '' }
+            if (input.id === 'deleteFirstInitialBtn') {
+                updatedObj.firstInitial = emptyItem
+                resetTextInput('#firstInitial')
+            } if (input.id === 'deleteMidInitialBtn') {
+                updatedObj.middleInitial = emptyItem
+                resetTextInput('#middleInitial')
+
+
+            }
+
+            updatedObj.enslaved.isEnslaved = input.checked;
         } else { //date items circa checkbox -- update value and the item string
             currItem.isCirca = input.checked
             currItem.resultStr = formatYearItemStr(input, currItem)
         }
     }
+
     return updatedObj;
 }
