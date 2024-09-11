@@ -16,7 +16,6 @@ const resetPreferredBtn = (currBtn) => {
 //this triggers taht btn and logic related to that ben press is triggered
 // logic for btn located at script .preferred-btn input listener or the handle func in handlePreferredBtns.js
 const setCurrItemAsPreferred = (input) => {
-
     const preferredBtnContainer = input.nextElementSibling
 
     if (preferredBtnContainer) {
@@ -27,6 +26,8 @@ const setCurrItemAsPreferred = (input) => {
                 prefferedBtn.click()
             }
         } else {
+            resetPreferredInput(input) //set the first input that has text in it in the current section as preferred- if any
+
             if (prefferedBtn.checked) prefferedBtn.click()
             if (input.id === 'middleBirthName') {
                 const middleInitInput = document.querySelector('#middleInitialInput')
@@ -35,7 +36,6 @@ const setCurrItemAsPreferred = (input) => {
                 const firstInitInput = document.querySelector('#firstInitial')
                 if (firstInitInput) firstInitInput.value = ''
             }
-            resetPreferredInput(input) //set the first input that has text in it in the current section as preferred- if any
         }
     }
 }

@@ -33,18 +33,28 @@ document.querySelectorAll('.form-input').forEach(input =>
         let preferredNameStr = '';
         let secondaryNameStr = '';
 
+        const { unknown, firstBirthName, firstInitial, middleBirthName, middleInitial, birthDate, deathDate, flourished, enslaved, infant } = personDataObj
+
         for (let input in personDataObj) {
+
             const inputItem = personDataObj[input]
             if (typeof inputItem.isPreferred !== 'undefined') {
                 let itemVal = inputItem.resultStr
-                // console.log(inputItem)
-                if (input === 'firstBirthName') {
-                    const middleInitPreffered = personDataObj.middleInitial.isPreferred
-                    const firstInitPreffered = personDataObj.firstInitial.isPreferred
-                    if (middleInitPreffered && !firstInitPreffered) {
-                        secondaryNameStr += `${itemVal} `
+
+                if (firstInitial.isPreferred || middleInitial.isPreferred) {
+                    if (input === 'firstInitial') {
+                        if (firstInitial.isPreferred && middleBirthName.isPreferred) {
+                            secondaryNameStr += `${middleBirthName.resultStr} `
+                        }
+                    }
+                    if (input === 'middleInitial') {
+                        if (middleInitial.isPreferred && firstBirthName.isPreferred) {
+                            secondaryNameStr = `${firstBirthName.resultStr}${secondaryNameStr} `
+                        }
+
                     }
                 }
+
                 if (input !== 'nameSuffix') {
                     if (inputItem.isPreferred) {
                         preferredNameStr += `${itemVal} `
@@ -52,33 +62,25 @@ document.querySelectorAll('.form-input').forEach(input =>
                         secondaryNameStr += `${itemVal} `
                     }
                 }
-
             }
         }
 
-
-
-
-
-        const { unknown, birthDate, deathDate, flourished, enslaved, infant } = personDataObj
-
+        //format unknown person item
         const formattedUnknown = unknown.unknownData ? `[${unknown.unknownData}],` : ''
 
+        //format infant str
         const infantStr = infant.isInfant ? '[infant]' : ''
 
+        //format enslaved person str
         let enslavedStr = ''
-
         if (enslaved.isEnslaved) {
-            enslavedStr = !enslaved.value ? '(Enslaved person)' : `(Enslaved by ${enslaved.value})`
+            enslavedStr = !enslaved.value ? '(enslaved person)' : `(enslaved by ${enslaved.value})`
         }
 
-
-
+        //format suffix name
         const suffixItem = personDataObj.nameSuffix
-
         let suffixStr = ''
         if (suffixItem.value) {
-
             if (suffixItem.isPreferred) {
                 console.log('suffix item is preferred')
                 suffixStr = suffixItem.resultStr
@@ -87,12 +89,11 @@ document.querySelectorAll('.form-input').forEach(input =>
 
                 secondaryNameStr += suffixItem.resultStr
                 suffixStr = ''
-                console.log('secondary name str:',secondaryNameStr)
+                console.log('secondary name str:', secondaryNameStr)
             }
         } else {
             suffixStr = ''
         }
-
         if (secondaryNameStr.trim()) {
             secondaryNameStr = `(${secondaryNameStr.trim()})`
             if (birthDate.resultStr ||
@@ -102,9 +103,24 @@ document.querySelectorAll('.form-input').forEach(input =>
                 secondaryNameStr = `${secondaryNameStr},`
             }
         }
+        secondaryNameStr = secondaryNameStr.trim()
+        secondaryNameStr = secondaryNameStr.trim()
+        if (preferredNameStr.trim() && !secondaryNameStr.trim()) {
+            console.log('this ran')
+            preferredNameStr = `${preferredNameStr.trim()},`
+        }
+
+        //format deathdate str
+        const deathDateStr = !birthDate.resultStr && deathDate.resultStr ? `-${deathDate.resultStr}` : deathDate.resultStr
 
 
-        const resStr = `${formattedUnknown} ${preferredNameStr} ${infantStr} ${secondaryNameStr}${suffixStr}${birthDate.resultStr}${deathDate.resultStr} ${flourished.resultStr} ${enslavedStr}`
+
+        let resStr = `${formattedUnknown} ${preferredNameStr} ${infantStr} ${secondaryNameStr}${suffixStr} ${birthDate.resultStr}${deathDateStr} ${flourished.resultStr} ${enslavedStr}`
+
+        // regex to finalize certain quirks that conditionals coudn't quite get rid of
+        // resStr = resStr.replace(/,{2}/g, ',');
+        resStr = resStr.replace(/,(\s*,)+/g, ',');
+
 
         //preview item
         document.querySelector('#previewText').innerText = resStr
@@ -112,6 +128,35 @@ document.querySelectorAll('.form-input').forEach(input =>
         // console.log(personDataObj)
     })
 );
+
+
+const deleteInitialBtn = document.querySelectorAll('.delete-initial')
+
+deleteInitialBtn.forEach(btn => {
+    let updatedObj = { ...personDataObj }
+    btn.addEventListener('click', () => {
+        let currInputId = ''
+        let currObjItem = {}
+        if (btn.id === 'deleteFirstInitialBtn') {
+            currObjItem = updatedObj.firstInitial
+            currInputId = '#firstInitial'
+        } if (btn.id === 'deleteMidInitialBtn') {
+            currObjItem = updatedObj.middleInitial
+            currInputId = '#middleInitial'
+        }
+        const textInput = document.querySelector(currInputId)
+        if (textInput.value) {
+            textInput.value = ''
+            triggerEvent(textInput)
+            currObjItem = { value: '', isPreferred: false, isHidden: false, resultStr: '' }
+            personDataObj = updatedObj
+        }
+    })
+
+
+})
+
+
 
 //temporary hide hide btn toggle
 const hideItemToggle = document.querySelectorAll('.hide-item-toggle').forEach(item => {

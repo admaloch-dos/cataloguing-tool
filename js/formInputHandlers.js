@@ -3,6 +3,7 @@ const handleTextInputs = (input, obj) => {
     //obj[input.id]
     let updatedObj = { ...obj }
 
+
     if (input.type === 'text') {
         const id = input.id
         let currItem = updatedObj[id]
@@ -25,6 +26,14 @@ const handleTextInputs = (input, obj) => {
             id === 'lastPenName' ||
             id === 'lastAnglicizedName') {
             formattedStr = inputValue.length ? `${inputValue},` : ''
+        } else if (input.classList.contains('initial-input')) {
+            const deleteInitialBtn = input.closest('.input-item').querySelector('.delete-initial')
+            console.log(deleteInitialBtn)
+            if (input.value) {
+                deleteInitialBtn.classList.remove('d-none')
+            } else {
+                deleteInitialBtn.classList.add('d-none')
+            }
         } else if (id === 'nickname') {
             formattedStr = inputValue.length ? `'${inputValue}'` : ''
         } else if (id === 'birthDate' || id === 'deathDate' || id === 'flourished') {
@@ -52,7 +61,7 @@ const handleTextInputs = (input, obj) => {
                 formattedStr = formatYearItemStr(input, currItem)
             }
         } else if (id === 'titleName' || id === 'indigenousName') {
-            
+
         }
 
         if (currItem.isPreferred) {
@@ -143,14 +152,14 @@ const formatYearItemStr = (input, objItem) => {
     const parentSectionId = input.closest('.input-item').id
 
     let textStr = value && parentSectionId === 'birth-date-item' ? `${value}-` : value
-    let circaStr = isCirca ? '.ca ' : ''
+    let circaStr = isCirca ? 'ca.' : ''
     let beforeAfterStr = formatBeforeAfterStr(beforeOrAfter)
 
     if (input.type === 'text') {
         const formattedInputVal = capFirstLettersInStr(input.value)
         textStr = input.id === 'birthDate' ? `${formattedInputVal}-` : formattedInputVal
     } else if (input.type === 'checkbox') {
-        circaStr = input.checked ? '.ca ' : ''
+        circaStr = input.checked ? 'ca.' : ''
     } else {
         beforeAfterStr = formatBeforeAfterStr(input.value)
     }

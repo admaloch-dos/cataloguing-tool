@@ -7,7 +7,16 @@ const handleTextInputs = (input, obj) => {
     if (input.type === 'text') {
         let inputValue = capFirstLettersInStr(input.value)
         let formattedStr = inputValue
-        revealItemCheckBoxes(input) //also run on the namesuffix select input
+        revealItemCheckBoxes(input) //also run on the namesuffix select inputif()
+        console.log(input)
+        if (input.classList.contains('initial-input')) {
+            const deleteInitialBtn = input.closest('.input-item').querySelector('.delete-initial')
+            console.log(deleteInitialBtn)
+            if (input.value) {
+
+
+            }
+        }
         if (id === 'firstBirthName') {
             hideIndividualTextInputs(inputValue.length, '#title-input-container');
             revealIndividualTextInputs(inputValue.length, '#first-init-preferred-item, #preferred-shortname-item');

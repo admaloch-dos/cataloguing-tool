@@ -70,3 +70,7 @@ h3 {
 max-width: 100px;
     /* display: none; */
 }
+
+.delete-initial {
+    cursor: pointer;
+}
