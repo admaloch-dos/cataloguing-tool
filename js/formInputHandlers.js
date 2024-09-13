@@ -26,14 +26,6 @@ const handleTextInputs = (input, obj) => {
             id === 'lastPenName' ||
             id === 'lastAnglicizedName') {
             formattedStr = inputValue.length ? `${inputValue},` : ''
-        } else if (input.classList.contains('initial-input')) {
-            const deleteInitialBtn = input.closest('.input-item').querySelector('.delete-initial')
-            console.log(deleteInitialBtn)
-            if (input.value) {
-                deleteInitialBtn.classList.remove('d-none')
-            } else {
-                deleteInitialBtn.classList.add('d-none')
-            }
         } else if (id === 'nickname') {
             formattedStr = inputValue.length ? `'${inputValue}'` : ''
         } else if (id === 'birthDate' || id === 'deathDate' || id === 'flourished') {
@@ -43,6 +35,14 @@ const handleTextInputs = (input, obj) => {
                     clearIndividualTextInputs(['#flourished'])
                     removeYearInputs(flourishedInput)
                 }
+
+                if (!input.value && id === 'birthDate' || input.value && id === 'deathDate') {
+
+                    $('#isAliveCheckItem').removeClass('d-flex').addClass('d-none')
+                } else {
+                    $('#isAliveCheckItem').removeClass('d-none').addClass('d-flex')
+                }
+
             } else if (id === 'flourished') {
                 const birthDateInput = document.querySelector('#birthDate')
                 const deathDateInput = document.querySelector('#deathDate')
@@ -61,7 +61,14 @@ const handleTextInputs = (input, obj) => {
                 formattedStr = formatYearItemStr(input, currItem)
             }
         } else if (id === 'titleName' || id === 'indigenousName') {
-
+            const nonTitleSections = document.querySelectorAll('.non-title-name')
+            nonTitleSections.forEach(section => {
+                section.querySelectorAll('.preferred-btn').forEach(btn => {
+                    if (btn.checked) {
+                        btn.click()
+                    }
+                })
+            })
         }
 
         if (currItem.isPreferred) {
@@ -83,8 +90,6 @@ const handleCheckInputs = (input, obj) => {
         const locatedObjKey = parentSection && parentSection.querySelector('.form-input').id
         const currItem = updatedObj[locatedObjKey]
         if (input.classList.contains('preferred-btn')) {
-            // console.log(updatedObj)
-            const parent = input.closest('.main-section')
 
             currItem.isPreferred = input.checked
 
@@ -92,15 +97,15 @@ const handleCheckInputs = (input, obj) => {
 
             resetPreferredBtn(input)
             if (input.classList.contains('preferred-initial')) {
+
                 //for initial btn.. locate normal name input and grab first letter and insert into hidden initial text input then trigger input change
                 const nameInput = input.closest('.input-item').previousElementSibling.querySelector('.name-input')
-                const initialTextInput = input.closest('.check-boxes').previousElementSibling
-                input.checked ? initialTextInput.value = genInitials(nameInput.value) : ''
-                triggerEvent(initialTextInput)
+                currItem.resultStr = input.checked ? genInitials(nameInput.value) : ''
+
+                if (!currItem.isPreferred) resetPreferredInput(input)
+
             }
 
-        } else if (input.classList.contains('hide-item-toggle')) {
-            currItem.isHidden = input.checked
         } else if (input.id === 'unknownCheckbox') {
             updatedObj.unknown.isUnknown = input.checked
             updatedObj.unknown.unknownData = input.checked ? 'Unnamed Person' : ''
@@ -111,6 +116,21 @@ const handleCheckInputs = (input, obj) => {
         } else if (input.id === 'enslavedCheckbox') {
             updatedObj.enslaved.isEnslaved = input.checked;
             revealIndividualTextInputs(input.checked, '#enslaved-text-item');
+        } else if (input.id === 'ficticiousCheckbox') {
+            updatedObj.ficticious.isFicticious = input.checked;
+            revealIndividualTextInputs(input.checked, '#ficticious-text-item');
+            hideIndividualTextInputs(input.checked, '.unknown-name-section, #non-human-checkbox-item, #enslaved-checkbox-item')
+        } else if (input.id === 'nonHumanCheckBox') {
+            updatedObj.nonHuman.isNonHuman = input.checked;
+            revealIndividualTextInputs(input.checked, '#non-human-text-item');
+            hideIndividualTextInputs(input.checked, '#first-name-section, #middle-name-section, #last-name-section, #additional-names-section, #enslaved-section, #infant-section, #indigenousItem, .unknown-name-section, #ficticious-checkbox-item');
+        } else if (input.id === 'isAlive') {
+            updatedObj.deathDate.isAlive = input.checked
+            if (input.checked) {
+                clearIndividualTextInputs(['#deathDate'])
+                // updatedObj.deathDate.value = ''
+                // updatedObj.deathDate.resultStr = ''
+            }
         } else { //date items circa checkbox -- update value and the item string
             currItem.isCirca = input.checked
             currItem.resultStr = formatYearItemStr(input, currItem)
@@ -151,13 +171,12 @@ const formatYearItemStr = (input, objItem) => {
     const { value, isCirca, beforeOrAfter } = objItem
     const parentSectionId = input.closest('.input-item').id
 
-    let textStr = value && parentSectionId === 'birth-date-item' ? `${value}-` : value
+    let textStr = value
     let circaStr = isCirca ? 'ca.' : ''
     let beforeAfterStr = formatBeforeAfterStr(beforeOrAfter)
 
     if (input.type === 'text') {
-        const formattedInputVal = capFirstLettersInStr(input.value)
-        textStr = input.id === 'birthDate' ? `${formattedInputVal}-` : formattedInputVal
+        textStr = capFirstLettersInStr(input.value)
     } else if (input.type === 'checkbox') {
         circaStr = input.checked ? 'ca.' : ''
     } else {
@@ -180,9 +199,9 @@ const removeYearInputs = (input) => {
 const formatBeforeAfterStr = (inputText) => {
     let res = ''
     if (inputText === 'before') {
-        res = '.b '
+        res = ' before '
     } else if (inputText === 'after') {
-        res = '.a '
+        res = ' after '
     } else res = ''
     return res;
 }
@@ -193,7 +212,7 @@ const formatBeforeAfterStr = (inputText) => {
 //select is revealed on click to specify if known - male/female etc..
 //this indicates taht all name related inputs are unknown and will be emptied/hidden on click
 const unknownNameBoxHandler = (isChecked) => {
-    const itemsToShowOrHide = "#infant-section, #title-section, #last-name-section, #first-name-section, #middle-name-section, #additional-names-section"
+    const itemsToShowOrHide = "#infant-section, #title-section, #last-name-section, #first-name-section, #middle-name-section, #additional-names-section, #non-human-checkbox-item, #ficticious-checkbox-item"
     if (isChecked) {
         clearSectionTextInputs('.name-section')
         $(itemsToShowOrHide).addClass('d-none').removeClass('d-flex')

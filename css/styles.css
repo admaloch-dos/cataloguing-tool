@@ -74,3 +74,17 @@ max-width: 100px;
 .delete-initial {
     cursor: pointer;
 }
+
+.type-container {
+    position: relative;
+}
+
+#non-human-text-item, #enslaved-text-item, #ficticious-text-item {
+    position: relative;
+    left: 3rem;
+}
+
+.input-item {
+    position: relative;
+    left: 2rem;
+}

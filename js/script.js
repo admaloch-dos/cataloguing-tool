@@ -33,7 +33,8 @@ document.querySelectorAll('.form-input').forEach(input =>
         let preferredNameStr = '';
         let secondaryNameStr = '';
 
-        const { unknown, firstBirthName, firstInitial, middleBirthName, middleInitial, birthDate, deathDate, flourished, enslaved, infant } = personDataObj
+        const { unknown, firstBirthName, firstInitial, middleBirthName, middleInitial, birthDate, deathDate, flourished, enslaved, infant, nonHuman, ficticious } = personDataObj
+
 
         for (let input in personDataObj) {
 
@@ -65,11 +66,9 @@ document.querySelectorAll('.form-input').forEach(input =>
             }
         }
 
-        //format unknown person item
-        const formattedUnknown = unknown.unknownData ? `[${unknown.unknownData}],` : ''
+        secondaryNameStr = secondaryNameStr.trim()
+        preferredNameStr = preferredNameStr.trim()
 
-        //format infant str
-        const infantStr = infant.isInfant ? '[infant]' : ''
 
         //format enslaved person str
         let enslavedStr = ''
@@ -82,79 +81,107 @@ document.querySelectorAll('.form-input').forEach(input =>
         let suffixStr = ''
         if (suffixItem.value) {
             if (suffixItem.isPreferred) {
-                console.log('suffix item is preferred')
                 suffixStr = suffixItem.resultStr
             } else {
-                console.log('suffix item is not preferred')
-
                 secondaryNameStr += suffixItem.resultStr
                 suffixStr = ''
-                console.log('secondary name str:', secondaryNameStr)
             }
         } else {
             suffixStr = ''
         }
-        if (secondaryNameStr.trim()) {
-            secondaryNameStr = `(${secondaryNameStr.trim()})`
-            if (birthDate.resultStr ||
-                deathDate.resultStr ||
-                flourished.resultStr ||
-                enslavedStr) {
-                secondaryNameStr = `${secondaryNameStr},`
-            }
-        }
-        secondaryNameStr = secondaryNameStr.trim()
-        secondaryNameStr = secondaryNameStr.trim()
-        if (preferredNameStr.trim() && !secondaryNameStr.trim()) {
-            console.log('this ran')
-            preferredNameStr = `${preferredNameStr.trim()},`
+
+        //format birth date str
+        let birthDateStr = ''
+        if (!deathDate.resultStr && birthDate.resultStr && !deathDate.isAlive) {
+            birthDateStr = `b. ${birthDate.resultStr}`
+        } else if (deathDate.resultStr && birthDate.resultStr || !deathDate.resultStr && birthDate.resultStr && deathDate.isAlive) {
+            birthDateStr = `${birthDate.resultStr}-`
+        } else {
+            birthDateStr = birthDate.resultStr
         }
 
         //format deathdate str
-        const deathDateStr = !birthDate.resultStr && deathDate.resultStr ? `-${deathDate.resultStr}` : deathDate.resultStr
+        let deathDateStr = ''
+        if (!birthDate.resultStr && deathDate.resultStr && !deathDate.isAlive) {
+            deathDateStr = `d. ${deathDate.resultStr}`
+        } else if (!birthDate.resultStr && deathDate.resultStr && deathDate.isAlive) {
+            deathDateStr = ''
+        } else {
+            deathDateStr = deathDate.resultStr
+        }
+
+        //flourished name str
+        const flourishedStr = flourished.resultStr ? `fl. ${flourished.resultStr}` : ''
+
+        //format unknown person item
+        // const formattedUnknown = unknown.unknownData ? `[${unknown.unknownData}],` : ''
+        let formattedUnknown = ''
+        if (unknown.isUnknown) {
+            const isCommaNeeded = birthDateStr || deathDateStr || flourishedStr
+             formattedUnknown = unknown.unknownData ? `[${unknown.unknownData}]` : ''
+             formattedUnknown = isCommaNeeded ? `${formattedUnknown},` : formattedUnknown
+
+        }
+
+        //format infant str
+        let infantStr = ''
+        if (infant.isInfant) {
+            const isCommaNeeded = birthDateStr || deathDateStr || flourishedStr
+            infantStr = infant.isInfant ? '[infant]' : ''
+            infantStr = isCommaNeeded ? `${infantStr},` : infantStr
+        }
+
+        //format non human str
+        let nonHumanTypeStr = ''
+        if (nonHuman.isNonHuman && nonHuman.resultStr) {
+            const areDatesKnown = birthDateStr || deathDateStr || flourishedStr
+            nonHumanTypeStr = areDatesKnown ? `(${nonHuman.resultStr}),` : `(${nonHuman.resultStr})`
+        }
+
+        //format ficticious person str
+        let ficticiousPersonStr = ''
+        if (ficticious.isFicticious) {
+            const isCommaNeeded = birthDateStr || deathDateStr || flourishedStr
+            ficticiousPersonStr = !ficticious.resultStr ? '(ficticious person)' : `(ficticious person from ${ficticious.resultStr})`
+            ficticiousPersonStr = !isCommaNeeded ? ficticiousPersonStr : `${ficticiousPersonStr},`
+        }
 
 
+        //format secondary name str
+        if (secondaryNameStr) {
+            secondaryNameStr = `(${secondaryNameStr})`
+            const isSecondaryTheEnd = !suffixStr && !birthDateStr && !deathDateStr && !flourishedStr && !enslavedStr
+            secondaryNameStr = isSecondaryTheEnd ? secondaryNameStr : `${secondaryNameStr},`
+        }
 
-        let resStr = `${formattedUnknown} ${preferredNameStr} ${infantStr} ${secondaryNameStr}${suffixStr} ${birthDate.resultStr}${deathDateStr} ${flourished.resultStr} ${enslavedStr}`
+        // format preferred name str
+        if (preferredNameStr) {
+            const isPreferredAlone = !secondaryNameStr && !suffixStr && !birthDateStr && !deathDateStr && !flourishedStr && !enslavedStr
+            const isCommaNeeded = (!secondaryNameStr && !isPreferredAlone && (suffixStr || birthDateStr || deathDateStr || flourishedStr || enslavedStr))
+            preferredNameStr = isCommaNeeded ? `${preferredNameStr},` : preferredNameStr
+        }
+
+
+        let resStr = `${formattedUnknown} ${preferredNameStr} ${infantStr} ${nonHumanTypeStr} ${secondaryNameStr}${suffixStr} ${ficticiousPersonStr} ${birthDateStr}${deathDateStr} ${flourishedStr} ${enslavedStr}`
 
         // regex to finalize certain quirks that conditionals coudn't quite get rid of
         // resStr = resStr.replace(/,{2}/g, ',');
+        resStr = resStr.trim()
+        resStr = resStr.replace(/\s+/g, ' ');
         resStr = resStr.replace(/,(\s*,)+/g, ',');
-
+        resStr = resStr.replace(/\s*,/g, ",");
+        resStr = resStr.replace(/,\s*$/, ",");
 
         //preview item
-        document.querySelector('#previewText').innerText = resStr
+        document.querySelector('#previewText').value = resStr.trim()
 
-        // console.log(personDataObj)
+        console.log(personDataObj)
+
     })
 );
 
 
-const deleteInitialBtn = document.querySelectorAll('.delete-initial')
-
-deleteInitialBtn.forEach(btn => {
-    let updatedObj = { ...personDataObj }
-    btn.addEventListener('click', () => {
-        let currInputId = ''
-        let currObjItem = {}
-        if (btn.id === 'deleteFirstInitialBtn') {
-            currObjItem = updatedObj.firstInitial
-            currInputId = '#firstInitial'
-        } if (btn.id === 'deleteMidInitialBtn') {
-            currObjItem = updatedObj.middleInitial
-            currInputId = '#middleInitial'
-        }
-        const textInput = document.querySelector(currInputId)
-        if (textInput.value) {
-            textInput.value = ''
-            triggerEvent(textInput)
-            currObjItem = { value: '', isPreferred: false, isHidden: false, resultStr: '' }
-            personDataObj = updatedObj
-        }
-    })
-
-
-})
+// i need a regex that does multiple things
 
 
 

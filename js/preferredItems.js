@@ -1,5 +1,4 @@
 const resetPreferredBtn = (currBtn) => {
-    // console.log('this ran')
     const parentContainer = currBtn.closest('.single-preferred-name')
     if (parentContainer) {
         const preferredButtons = parentContainer.querySelectorAll('.preferred-btn');

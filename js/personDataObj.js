@@ -1,4 +1,5 @@
 let personDataObj = {
+    nonHuman: {isNonHuman: false, value: '', resultStr: ''},
     unknown: {isUnknown: false, unknownData: '', resultStr: ''},
     lastBirthName: { value: '', isPreferred: false, isHidden: false , resultStr: ''},
     lastPenName: { value: '', isPreferred: false, isHidden: false , resultStr: ''},
@@ -19,7 +20,8 @@ let personDataObj = {
     titleName: { value: '', isPreferred: false, isHidden: false , resultStr: ''},
     indigenousName: { value: '', isPreferred: false, isHidden: false , resultStr: ''},
     birthDate: { value: '', isCirca: false, beforeOrAfter: '' , resultStr: ''},
-    deathDate: { value: '', isCirca: false, beforeOrAfter: '' , resultStr: ''},
+    deathDate: { isAlive: false, value: '', isCirca: false, beforeOrAfter: '' , resultStr: ''},
     flourished: { value: '', isCirca: false, beforeOrAfter: '' , resultStr: ''},
     enslaved: {isEnslaved: false, value: '', resultStr: ''},
+    ficticious: {isFicticious: false, value: '', resultStr: ''},
 }

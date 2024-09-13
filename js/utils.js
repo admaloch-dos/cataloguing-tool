@@ -19,10 +19,18 @@ const clearNameSpans = () => {
 
 // takes a string with multiple words and capitalizes first letter of each word
 const capFirstLettersInStr = (inputStr) => {
-    return inputStr.toLowerCase().split(' ')
-        .map(str => str.slice(0, 1).toUpperCase() + str.slice(1))
+    const ignoreWords = ['the', 'century'];
+    return inputStr.split(' ')
+        .map(str => {
+            if (!ignoreWords.includes(str.toLowerCase())) {
+                return str.slice(0, 1).toUpperCase() + str.slice(1);
+            } else {
+                return str;
+            }
+        })
         .join(' ');
 }
+
 
 const genInitials = (inputStr) => {
     return inputStr.toLowerCase().split(' ')
